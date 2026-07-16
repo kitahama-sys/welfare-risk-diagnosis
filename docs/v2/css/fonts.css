@@ -1,46 +1,19 @@
 @charset "UTF-8";
-/* Self-hosted subset fonts (generated from the fixed page text).
-   コピー・文言を追加した場合は README の手順でサブセットを再生成すること。 */
+/* Self-hosted subset fonts. 文言追加時はREADMEの手順でサブセット再生成。 */
 
-@font-face {
-  font-family: "Shippori Mincho";
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/shippori-semibold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Shippori Mincho";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/shippori-bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Zen Kaku Gothic New";
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/zenkaku-regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Zen Kaku Gothic New";
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/zenkaku-medium.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Zen Kaku Gothic New";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/zenkaku-bold.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Manrope";
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  src: url("../assets/fonts/manrope-var.woff2") format("woff2-variations");
-}
+@font-face { font-family: "Zen Old Mincho"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenold-regular.woff2") format("woff2"); }
+@font-face { font-family: "Zen Old Mincho"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenold-bold.woff2") format("woff2"); }
+@font-face { font-family: "Zen Old Mincho"; font-weight: 900; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenold-black.woff2") format("woff2"); }
+@font-face { font-family: "Zen Kaku Gothic Antique"; font-weight: 400; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenkakuant-regular.woff2") format("woff2"); }
+@font-face { font-family: "Zen Kaku Gothic Antique"; font-weight: 500; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenkakuant-medium.woff2") format("woff2"); }
+@font-face { font-family: "Zen Kaku Gothic Antique"; font-weight: 700; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/zenkakuant-bold.woff2") format("woff2"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400 800; font-style: normal; font-display: swap;
+  src: url("../assets/fonts/garamond-var.woff2") format("woff2-variations"); }
+@font-face { font-family: "EB Garamond"; font-weight: 400 800; font-style: italic; font-display: swap;
+  src: url("../assets/fonts/garamond-italic-var.woff2") format("woff2-variations"); }

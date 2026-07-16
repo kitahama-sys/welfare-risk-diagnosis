@@ -1,0 +1,15 @@
+<svg viewBox="0 0 424 424" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="あうん TOTAL SERVICE">
+  <!-- 正式ロゴデータ支給までのトレース版 -->
+  <circle cx="212" cy="212" r="212" fill="#60BDC4"/>
+  <g stroke="#FFFFFF" stroke-width="23" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M128 76 L300 76"/>
+    <path d="M256 44 L256 122"/>
+    <path d="M208 122 C158 116 128 138 132 160 C136 184 178 190 206 176"/>
+    <path d="M130 206 L300 152"/>
+    <path d="M293 172 L293 208"/>
+    <path d="M128 250 L300 224"/>
+    <path d="M128 288 L300 262"/>
+    <path d="M136 312 L136 330 C136 346 150 350 162 342 C178 330 188 324 200 328 C212 332 218 340 230 338 C244 336 252 324 264 316 C278 306 292 310 292 326 L292 340"/>
+  </g>
+  <text x="212" y="374" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="19" letter-spacing="8" font-weight="500">TOTAL SERVICE</text>
+</svg>

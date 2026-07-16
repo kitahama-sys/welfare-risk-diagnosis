@@ -1,4 +1,4 @@
-/* AUN Corporate Site V2 */
+/* AUN Corporate Site V2.1 */
 (function () {
   "use strict";
 
@@ -34,27 +34,47 @@
     if (e.target.closest("a")) closeMenu();
   });
 
-  /* hero elements: reveal on load (clipped lines never intersect, so no IO) */
+  /* hero: reveal on load (クリップされた行はIOに映らないため直接発火) */
   var heroFx = document.querySelectorAll(".fv .fx, .page-hero .fx");
   heroFx.forEach(function (el, i) {
     if (reduced) { el.classList.add("on"); return; }
     setTimeout(function () { el.classList.add("on"); }, 160 + i * 130);
   });
 
-  /* reveal */
+  /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */
+  var mani = document.querySelector(".manifesto");
+  if (mani) {
+    var maniFx = mani.querySelectorAll(".fx");
+    var maniReveal = function () {
+      maniFx.forEach(function (el, i) {
+        setTimeout(function () { el.classList.add("on"); }, i * 170);
+      });
+    };
+    if (reduced || !("IntersectionObserver" in window)) {
+      maniFx.forEach(function (el) { el.classList.add("on"); });
+    } else {
+      var mio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { maniReveal(); mio.disconnect(); }
+        });
+      }, { threshold: 0.25 });
+      mio.observe(mani);
+    }
+  }
+
+  /* generic reveal */
   var targets = Array.prototype.filter.call(document.querySelectorAll(".fx"), function (el) {
-    return !el.closest(".fv, .page-hero");
+    return !el.closest(".fv, .page-hero, .manifesto");
   });
   if (reduced || !("IntersectionObserver" in window)) {
     targets.forEach(function (el) { el.classList.add("on"); });
   } else {
-    var stagger = 0;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
         var delay = 0;
-        var group = el.closest(".fv-copy, .action-grid, .jigyo-fields, .values, .flow");
+        var group = el.closest(".action-grid, .field-rows, .values, .flow");
         if (group) {
           var idx = Array.prototype.indexOf.call(group.querySelectorAll(".fx"), el);
           delay = Math.max(0, idx) * 110;
@@ -77,23 +97,6 @@
     rio.observe(route);
   } else if (route) {
     route.classList.add("on");
-  }
-
-  /* orb parallax */
-  var orbs = document.querySelectorAll("[data-parallax]");
-  if (orbs.length && !reduced) {
-    var ticking = false;
-    function parallax() {
-      var y = window.scrollY || 0;
-      orbs.forEach(function (el) {
-        var f = parseFloat(el.getAttribute("data-parallax")) || 0;
-        el.style.transform = "translateY(" + (y * f * -1) + "px)";
-      });
-      ticking = false;
-    }
-    window.addEventListener("scroll", function () {
-      if (!ticking) { requestAnimationFrame(parallax); ticking = true; }
-    }, { passive: true });
   }
 
   /* demo forms */
