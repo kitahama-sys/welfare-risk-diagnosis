@@ -95,8 +95,8 @@ em, i { font-style: normal; }
 }
 .btn::after { content: "→"; font-family: var(--en); font-style: normal; font-size: 1em; transition: transform 0.3s var(--ease); }
 .btn:hover::after { transform: translateX(5px); }
-.btn-cta { background: var(--cta); color: #FFFFFF; }
-.btn-cta:hover { background: var(--cta-hover); }
+.btn-cta { background: linear-gradient(135deg, #B85C35 0%, #A84F2D 55%, #98441F 100%); color: #FFFFFF; }
+.btn-cta:hover { background: linear-gradient(135deg, #A84F2D 0%, #93441F 60%, #883C1B 100%); }
 .btn-line { border: 1px solid var(--teal); color: var(--teal); }
 .btn-line:hover { background: var(--teal); color: var(--white); }
 .btn-white { background: var(--white); color: var(--teal); }
@@ -201,6 +201,10 @@ em, i { font-style: normal; }
   display: flex; flex-direction: column;
   padding-top: var(--header-h);
   overflow: clip;
+  background:
+    radial-gradient(85% 55% at 88% -12%, rgba(96, 189, 196, 0.30), transparent 62%),
+    radial-gradient(60% 45% at -8% 108%, rgba(212, 129, 81, 0.13), transparent 60%),
+    linear-gradient(180deg, #E9F3F3 0%, var(--white) 48%);
 }
 .fv-wrap {
   flex: 1;
@@ -336,7 +340,8 @@ em, i { font-style: normal; }
   flex: none;
   display: flex; align-items: center; gap: 10px;
   padding: 13px clamp(16px, 2.4vw, 32px);
-  background: var(--teal); color: var(--white);
+  background: linear-gradient(135deg, #0C4C57, #073E47);
+  color: var(--white);
   font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0.28em;
 }
 .fv-ticker { flex: 1; min-width: 0; padding-block: 13px; overflow: hidden; white-space: nowrap; }
@@ -351,12 +356,22 @@ em, i { font-style: normal; }
 /* ==========================================================================
    Manifesto — 意志
    ========================================================================== */
-.manifesto { position: relative; padding: clamp(80px, 10vw, 150px) 0 clamp(40px, 6vw, 90px); overflow: clip; }
+.manifesto {
+  position: relative;
+  padding: clamp(80px, 10vw, 150px) 0 clamp(40px, 6vw, 90px);
+  overflow: clip;
+  background: radial-gradient(58% 72% at 10% 24%, rgba(96, 189, 196, 0.17), transparent 64%);
+}
 .manifesto-inner { position: relative; }
 .mani-copy {
   font-family: var(--serif); font-weight: 900;
   font-size: clamp(34px, 5.4vw, 76px);
   line-height: 1.55; letter-spacing: 0.06em;
+}
+.mani-copy .row > span {
+  background-image: linear-gradient(94deg, var(--teal) 25%, #2E7B84 78%, #3E96A0 105%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
 }
 .mani-copy .row { display: block; overflow: hidden; }
 .mani-copy .row > span { display: inline-block; }
@@ -381,7 +396,12 @@ em, i { font-style: normal; }
   color: transparent;
   -webkit-text-stroke: 1px rgba(7, 62, 71, 0.25);
 }
-.divider-track .solid { color: rgba(96, 189, 196, 0.45); -webkit-text-stroke: 0; }
+.divider-track .solid {
+  -webkit-text-stroke: 0;
+  background-image: linear-gradient(96deg, rgba(96,189,196,0.75), rgba(46,123,132,0.65) 60%, rgba(212,129,81,0.5) 110%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
 
 /* ==========================================================================
    Sections common
@@ -471,6 +491,7 @@ em, i { font-style: normal; }
 /* ==========================================================================
    02 fields — 介護 / 福祉 / 子ども
    ========================================================================== */
+.jigyo { background: linear-gradient(180deg, rgba(96,189,196,0.10), rgba(96,189,196,0.02) 62%, transparent 100%); }
 .field-rows { border-top: 2px solid var(--teal); }
 .field-row { border-bottom: 1px solid var(--line); }
 .field-row > a {
@@ -503,7 +524,10 @@ em, i { font-style: normal; }
 /* ==========================================================================
    03 kyoten route（働く人セクションへ重ねる）
    ========================================================================== */
-.kyoten { padding-bottom: 0; z-index: 2; }
+.kyoten {
+  padding-bottom: 0; z-index: 2;
+  background: linear-gradient(180deg, transparent 0%, rgba(96,189,196,0.08) 55%, rgba(96,189,196,0.30) 100%);
+}
 .route-panel {
   position: relative;
   background: var(--paper);
@@ -540,7 +564,12 @@ em, i { font-style: normal; }
 /* ==========================================================================
    04 hataraku
    ========================================================================== */
-.hataraku { background: var(--tq); padding-top: calc(clamp(84px, 10vw, 140px) + clamp(70px, 9vw, 130px)); }
+.hataraku {
+  background:
+    radial-gradient(70% 90% at 90% 110%, rgba(7, 62, 71, 0.16), transparent 60%),
+    linear-gradient(163deg, #79CDD3 0%, #60BDC4 46%, #52AFB7 100%);
+  padding-top: calc(clamp(84px, 10vw, 140px) + clamp(70px, 9vw, 130px));
+}
 .hataraku-inner { position: relative; display: grid; grid-template-columns: minmax(280px, 5fr) 7fr; gap: clamp(32px, 5vw, 90px); }
 .hataraku .section-head { margin-bottom: 0; }
 .hataraku .sec-num .en { color: var(--teal); }
@@ -553,6 +582,7 @@ em, i { font-style: normal; }
 /* ==========================================================================
    05 chiiki
    ========================================================================== */
+.chiiki { background: radial-gradient(52% 64% at 92% 8%, rgba(96,189,196,0.15), transparent 62%); }
 .chiiki-list { border-top: 1px solid var(--line); }
 .chiiki-list li { border-bottom: 1px solid var(--line); }
 .chiiki-list a {
@@ -572,7 +602,12 @@ em, i { font-style: normal; }
 /* ==========================================================================
    06 actions
    ========================================================================== */
-.actions { background: var(--teal); color: var(--white); }
+.actions {
+  background:
+    radial-gradient(55% 70% at 88% 108%, rgba(96, 189, 196, 0.14), transparent 60%),
+    linear-gradient(180deg, #0C4C57 0%, #073E47 58%, #063540 100%);
+  color: var(--white);
+}
 .actions-orb {
   position: absolute; right: -8%; bottom: -30%;
   width: clamp(360px, 44vw, 680px); height: clamp(360px, 44vw, 680px);
@@ -604,6 +639,9 @@ em, i { font-style: normal; }
   position: relative;
   padding: calc(var(--header-h) + clamp(56px, 9vh, 110px)) 0 clamp(48px, 7vh, 84px);
   overflow: clip;
+  background:
+    radial-gradient(70% 60% at 92% -8%, rgba(96, 189, 196, 0.26), transparent 62%),
+    linear-gradient(180deg, #E9F3F3 0%, var(--white) 70%);
 }
 .page-hero::before {
   content: "";
@@ -635,7 +673,7 @@ em, i { font-style: normal; }
 
 /* blocks */
 .block { padding-block: clamp(56px, 7vw, 96px); }
-.block-tint { background: linear-gradient(180deg, var(--tq-06), rgba(96,189,196,0.02)); }
+.block-tint { background: linear-gradient(180deg, rgba(96,189,196,0.13), rgba(96,189,196,0.03) 74%, transparent 100%); }
 .block-head { max-width: 780px; margin-bottom: clamp(34px, 4.5vw, 56px); }
 .block-title {
   font-family: var(--serif); font-weight: 900;
@@ -760,7 +798,12 @@ em, i { font-style: normal; }
 .form-done.show { display: block; }
 
 /* page CTA band */
-.page-cta { background: var(--teal); color: var(--white); padding-block: clamp(64px, 8vw, 104px); position: relative; overflow: clip; }
+.page-cta {
+  background:
+    radial-gradient(55% 70% at 88% 108%, rgba(96, 189, 196, 0.14), transparent 60%),
+    linear-gradient(180deg, #0C4C57 0%, #073E47 58%, #063540 100%);
+  color: var(--white); padding-block: clamp(64px, 8vw, 104px); position: relative; overflow: clip;
+}
 .page-cta .actions-orb { right: -10%; bottom: -50%; }
 .page-cta-inner { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 24px 40px; }
 .page-cta-copy { margin-right: auto; }
@@ -772,7 +815,7 @@ em, i { font-style: normal; }
 /* ==========================================================================
    Footer
    ========================================================================== */
-.site-footer { background: var(--teal); color: var(--white); }
+.site-footer { background: linear-gradient(180deg, #063540 0%, #052C34 100%); color: var(--white); }
 .footer-okuzuke {
   font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0.3em;
   color: rgba(247,245,240,0.8);
