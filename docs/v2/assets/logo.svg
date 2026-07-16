@@ -1,7 +1,7 @@
 <svg viewBox="0 0 424 424" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="あうん TOTAL SERVICE">
   <!-- 正式ロゴデータ支給までのトレース版 -->
   <circle cx="212" cy="212" r="212" fill="#60BDC4"/>
-  <g stroke="#FFFFFF" stroke-width="23" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <g stroke="#FFFFFF" stroke-width="23" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(424 0) scale(-1 1)">
     <path d="M128 76 L300 76"/>
     <path d="M256 44 L256 122"/>
     <path d="M208 122 C158 116 128 138 132 160 C136 184 178 190 206 176"/>
