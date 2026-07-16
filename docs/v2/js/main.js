@@ -34,8 +34,17 @@
     if (e.target.closest("a")) closeMenu();
   });
 
+  /* hero elements: reveal on load (clipped lines never intersect, so no IO) */
+  var heroFx = document.querySelectorAll(".fv .fx, .page-hero .fx");
+  heroFx.forEach(function (el, i) {
+    if (reduced) { el.classList.add("on"); return; }
+    setTimeout(function () { el.classList.add("on"); }, 160 + i * 130);
+  });
+
   /* reveal */
-  var targets = document.querySelectorAll(".fx");
+  var targets = Array.prototype.filter.call(document.querySelectorAll(".fx"), function (el) {
+    return !el.closest(".fv, .page-hero");
+  });
   if (reduced || !("IntersectionObserver" in window)) {
     targets.forEach(function (el) { el.classList.add("on"); });
   } else {
