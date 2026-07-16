@@ -1,0 +1,812 @@
+@charset "UTF-8";
+/* ==========================================================================
+   AUN Corporate Site Prototype
+   「滋賀のふくしを、支える場所から、育つ場所へ。」
+
+   Color system (usage ratio)
+   - Soft White   #F7F5F0  70%  背景・余白
+   - AUN Turquoise#60BDC4  20%  面・アイコン・図形
+   - Deep Teal    #073E47   7%  本文・見出し・強い面
+   - Warm Orange  #D48151   3%  境界線・小面・アクセント
+   - Action O.700 #A84F2D  CTAのみ（白文字はここだけ）
+   ========================================================================== */
+
+:root {
+  --white: #F7F5F0;
+  --paper: #FFFFFF;
+  --tq: #60BDC4;
+  --tq-ink: #2E7B84;
+  --tq-08: rgba(96, 189, 196, 0.08);
+  --tq-14: rgba(96, 189, 196, 0.14);
+  --teal: #073E47;
+  --teal-70: rgba(7, 62, 71, 0.70);
+  --teal-45: rgba(7, 62, 71, 0.45);
+  --line: rgba(7, 62, 71, 0.16);
+  --line-soft: rgba(7, 62, 71, 0.10);
+  --orange: #D48151;
+  --cta: #A84F2D;
+  --cta-hover: #8F3F20;
+
+  --serif: "Shippori Mincho", "Noto Serif JP", "Hiragino Mincho ProN", serif;
+  --sans: "Zen Kaku Gothic New", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "IPAPGothic", sans-serif;
+  --en: "Manrope", "Helvetica Neue", Arial, sans-serif;
+
+  --header-h: 76px;
+  --pad: clamp(20px, 4.5vw, 48px);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+html, body { overflow-x: clip; }
+body {
+  background: var(--white);
+  color: var(--teal);
+  font-family: var(--sans);
+  font-size: 15.5px;
+  font-weight: 400;
+  line-height: 2.05;
+  letter-spacing: 0.04em;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+em { font-style: normal; }
+.en { font-family: var(--en); letter-spacing: 0.14em; font-feature-settings: normal; }
+.sp { display: none; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--teal); color: var(--white); padding: 8px 16px; z-index: 200;
+}
+.skip-link:focus { left: 0; }
+
+.container {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14.5px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 17px 34px;
+  border-radius: 2px;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+}
+.btn-cta { background: var(--cta); color: #FFFFFF; }
+.btn-cta:hover { background: var(--cta-hover); }
+.btn-line { border: 1px solid var(--teal); color: var(--teal); background: transparent; }
+.btn-line:hover { background: var(--teal); color: var(--white); }
+.btn-white { background: var(--white); color: var(--teal); }
+.btn-white:hover { background: var(--tq); color: var(--teal); }
+.btn-outline-w { border: 1px solid rgba(247, 245, 240, 0.6); color: var(--white); }
+.btn-outline-w:hover { border-color: var(--white); background: rgba(247, 245, 240, 0.08); }
+.btn-ghost { border: 1px solid var(--line); color: var(--teal); }
+.btn-s { padding: 12px 22px; font-size: 13px; }
+.btn-full { width: 100%; }
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  background: rgba(247, 245, 240, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: var(--header-h);
+  padding-inline: clamp(20px, 3vw, 40px);
+}
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-mark { width: 34px; height: 24px; flex: none; }
+.logo-text {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.logo-text small {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--teal-70);
+}
+.global-nav { margin-left: auto; }
+.global-nav ul { display: flex; gap: clamp(16px, 2.2vw, 30px); }
+.global-nav a {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 6px 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s;
+}
+.global-nav a:hover { border-bottom-color: var(--orange); }
+
+.header-actions { display: flex; align-items: center; gap: 14px; }
+.header-textlink {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid var(--tq);
+  line-height: 1;
+  transition: border-color 0.25s;
+}
+.header-textlink:hover { border-left-color: var(--orange); }
+
+.menu-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--teal);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(4.5px) rotate(24deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-4.5px) rotate(-24deg); }
+
+/* mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  z-index: 99;
+  background: var(--white);
+  padding: 40px var(--pad) 48px;
+  overflow-y: auto;
+}
+.mobile-nav li { border-bottom: 1px solid var(--line-soft); }
+.mobile-nav a {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 18px 4px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.mobile-nav em { font-family: var(--en); font-size: 11px; letter-spacing: 0.18em; color: var(--tq-ink); font-weight: 700; }
+.mobile-actions { display: grid; gap: 12px; margin-top: 36px; }
+
+/* ==========================================================================
+   FV
+   ========================================================================== */
+.fv { padding-top: var(--header-h); background: var(--white); }
+.fv-inner {
+  display: grid;
+  grid-template-columns: minmax(440px, 46fr) 54fr;
+  align-items: stretch;
+  max-width: 1400px;
+  margin-inline: auto;
+  min-height: min(88vh, 820px);
+}
+.fv-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(48px, 6vw, 88px) clamp(28px, 4vw, 64px) clamp(48px, 6vw, 88px) clamp(20px, 4vw, 56px);
+}
+.fv-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--teal-70);
+  margin-bottom: clamp(28px, 4vh, 44px);
+}
+.fv-label .en { font-size: 11px; font-weight: 700; color: var(--tq-ink); }
+.fv-label::before {
+  content: "";
+  width: 34px; height: 1px;
+  background: var(--orange);
+}
+.fv-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1.72;
+  letter-spacing: 0.09em;
+}
+.fv-title span { display: block; }
+.fv-title .l2 { padding-left: 0.75em; }
+.fv-title .l3 { padding-left: 1.5em; }
+.fv-lead {
+  margin-top: clamp(28px, 4vh, 44px);
+  max-width: 34em;
+  font-size: 14.5px;
+  line-height: 2.3;
+  color: var(--teal);
+}
+.fv-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: clamp(30px, 4.5vh, 48px); }
+
+/* --- FV photo composition guide --- */
+.fv-photo { position: relative; padding: clamp(20px, 3vw, 36px) clamp(20px, 3vw, 40px) 0 0; }
+.guide-frame {
+  position: relative;
+  height: calc(100% - 56px);
+  min-height: 480px;
+  background:
+    linear-gradient(160deg, rgba(96, 189, 196, 0.16) 0%, rgba(96, 189, 196, 0.05) 38%, rgba(212, 129, 81, 0.05) 100%),
+    var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.guide-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
+  background-size: 33.333% 33.333%;
+  opacity: 0.55;
+}
+.guide-tag {
+  position: absolute; top: 18px; left: 20px;
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  color: var(--teal);
+  padding-left: 12px;
+  border-left: 2px solid var(--orange);
+}
+.guide-tag .en { font-size: 10px; font-weight: 700; color: var(--teal-70); }
+
+.guide-mobile-band {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 46%; width: 38%;
+  border-inline: 1px dashed rgba(7, 62, 71, 0.35);
+  background: rgba(96, 189, 196, 0.06);
+}
+.band-label {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--teal-70);
+  background: rgba(247, 245, 240, 0.85);
+  padding: 3px 10px;
+}
+
+.guide-subject {
+  position: absolute;
+  left: 53%; bottom: 15%;
+  width: clamp(90px, 11vw, 130px);
+}
+.figure-note { width: 100%; opacity: 0.9; }
+.subject-label {
+  margin-top: 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  color: var(--teal);
+}
+.subject-label span {
+  display: block;
+  font-weight: 400;
+  font-size: 10.5px;
+  color: var(--teal-70);
+  letter-spacing: 0.06em;
+}
+
+.guide-copyarea {
+  position: absolute;
+  top: 22%; left: 7%;
+  width: 30%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(7, 62, 71, 0.25);
+  display: flex;
+  align-items: flex-end;
+}
+.guide-copyarea span {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  color: var(--teal-70);
+  padding: 10px 12px;
+}
+
+.guide-depth {
+  position: absolute;
+  top: 16%; right: 6%;
+  max-width: 34%;
+  text-align: right;
+}
+.guide-depth span {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--teal-70);
+  border-bottom: 1px solid rgba(212, 129, 81, 0.5);
+  padding-bottom: 4px;
+}
+
+.guide-caption {
+  margin-top: 14px;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  line-height: 1.9;
+  color: var(--teal-70);
+  max-width: 44em;
+}
+
+/* ==========================================================================
+   Sections (common)
+   ========================================================================== */
+.section { padding-block: clamp(84px, 11vw, 148px); }
+.section-head { max-width: 760px; margin-bottom: clamp(44px, 6vw, 72px); }
+.sec-num {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--teal-70);
+  margin-bottom: 22px;
+}
+.sec-num .en {
+  font-size: 13px;
+  color: var(--tq-ink);
+  letter-spacing: 0.1em;
+}
+.sec-num::before {
+  content: "";
+  width: 9px; height: 9px;
+  background: var(--tq);
+}
+.sec-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(27px, 3.2vw, 40px);
+  line-height: 1.66;
+  letter-spacing: 0.08em;
+}
+.sec-intro {
+  margin-top: 26px;
+  font-size: 14.5px;
+  line-height: 2.25;
+  color: var(--teal);
+  max-width: 44em;
+}
+
+.sec-cta {
+  margin-top: clamp(48px, 6vw, 72px);
+  padding-top: 30px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 26px;
+}
+.sec-cta p {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: 0.06em;
+  margin-right: auto;
+}
+.sec-cta.left { border-top: none; padding-top: 0; justify-content: flex-start; }
+.sec-cta.left .cta-note { font-family: var(--sans); font-weight: 400; font-size: 12.5px; color: var(--teal-70); margin-right: 0; }
+
+/* ==========================================================================
+   01 「育つ」とは
+   ========================================================================== */
+.sodatsu-list { border-top: 1px solid var(--line); }
+.sodatsu-item {
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) 1fr;
+  gap: 24px clamp(24px, 5vw, 80px);
+  padding-block: clamp(36px, 5vw, 56px);
+  border-bottom: 1px solid var(--line);
+}
+.sodatsu-key { display: flex; align-items: baseline; gap: 18px; }
+.key-num { font-size: 12px; font-weight: 700; color: var(--tq-ink); letter-spacing: 0.1em; }
+.sodatsu-key h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(30px, 3.4vw, 42px);
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+.key-en { font-size: 10.5px; font-weight: 600; letter-spacing: 0.22em; color: var(--teal-70); }
+.sodatsu-body h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(17px, 1.7vw, 20px);
+  letter-spacing: 0.06em;
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+.sodatsu-body p { max-width: 42em; font-size: 14.5px; line-height: 2.2; }
+
+/* ==========================================================================
+   02 事業領域
+   ========================================================================== */
+.jigyo { background: var(--tq-08); }
+.jigyo-band {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.jigyo-field {
+  position: relative;
+  padding: clamp(28px, 3.5vw, 44px) clamp(22px, 3vw, 40px) clamp(30px, 3.5vw, 44px);
+}
+.jigyo-field + .jigyo-field { border-left: 1px solid var(--line-soft); }
+.field-en {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--teal-70);
+  margin-bottom: 6px;
+}
+.field-node {
+  position: relative;
+  height: 13px;
+  margin: 12px 0 20px;
+}
+.field-node::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * clamp(22px, 3vw, 40px));
+  right: calc(-1 * clamp(22px, 3vw, 40px));
+  height: 1px;
+  background: var(--tq);
+}
+.field-node::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--tq);
+  z-index: 1;
+}
+.jigyo-field h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(21px, 2.1vw, 26px);
+  letter-spacing: 0.08em;
+  margin-bottom: 26px;
+}
+.field-copy {
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 2;
+  margin-bottom: 18px;
+  min-height: 3.6em;
+}
+.field-services li {
+  position: relative;
+  padding: 9px 0 9px 18px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  border-top: 1px solid var(--line-soft);
+}
+.field-services li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: 1.05em;
+  width: 7px; height: 7px;
+  background: var(--tq);
+}
+
+/* ==========================================================================
+   03 拠点と地域
+   ========================================================================== */
+.kyoten-map {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: clamp(20px, 3vw, 36px);
+}
+.kyoten-area {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: clamp(24px, 3vw, 40px);
+}
+.area-name {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.1em;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--tq);
+  margin-bottom: 6px;
+}
+.area-name .en { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; color: var(--tq-ink); }
+.kyoten-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.kyoten-list li:last-child { border-bottom: none; }
+.k-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  min-width: 11em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.k-tag {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--cta);
+  border: 1px solid var(--orange);
+  padding: 2px 8px;
+  line-height: 1.5;
+}
+.k-role { font-size: 13.5px; color: var(--teal-70); line-height: 1.9; }
+.kyoten-note {
+  margin-top: 20px;
+  font-size: 12.5px;
+  color: var(--teal-70);
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   04 働く人
+   ========================================================================== */
+.hataraku { background: var(--tq); }
+.hataraku-inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 5fr) 7fr;
+  gap: clamp(32px, 5vw, 80px);
+}
+.hataraku .section-head { margin-bottom: 0; }
+.hataraku .sec-num { color: var(--teal); }
+.hataraku .sec-num .en { color: var(--teal); }
+.hataraku .sec-num::before { background: var(--white); }
+.hataraku-body p {
+  max-width: 40em;
+  font-size: 15px;
+  line-height: 2.25;
+  font-weight: 500;
+}
+.hataraku-body p + p { margin-top: 1.6em; }
+.hataraku-body .sec-cta { margin-top: 40px; }
+
+/* ==========================================================================
+   05 地域との関係
+   ========================================================================== */
+.chiiki-list { border-top: 1px solid var(--line); }
+.chiiki-list li { border-bottom: 1px solid var(--line); }
+.chiiki-list a {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr auto;
+  align-items: center;
+  gap: 8px clamp(20px, 4vw, 56px);
+  padding: clamp(24px, 3vw, 34px) 8px;
+  transition: background-color 0.25s ease, padding-left 0.25s ease;
+}
+.chiiki-list a:hover { background: var(--tq-14); padding-left: 20px; }
+.c-who {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(17px, 1.8vw, 20px);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+}
+.c-what { font-size: 13.5px; color: var(--teal-70); line-height: 1.9; }
+.c-arrow { font-family: var(--en); font-size: 18px; color: var(--cta); }
+
+/* ==========================================================================
+   06 行動導線
+   ========================================================================== */
+.actions { background: var(--teal); color: var(--white); }
+.actions .section-head.inverse .sec-num { color: rgba(247, 245, 240, 0.7); }
+.actions .section-head.inverse .sec-num .en { color: var(--tq); }
+.actions .sec-intro { color: rgba(247, 245, 240, 0.85); }
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  counter-reset: none;
+}
+.action-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(247, 245, 240, 0.25);
+  padding: clamp(24px, 2.5vw, 34px) clamp(20px, 2.2vw, 30px);
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+.a-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--tq);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--orange);
+  margin-bottom: 22px;
+}
+.action-card h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 23px;
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+}
+.a-purpose {
+  font-size: 13.5px;
+  line-height: 2.05;
+  color: rgba(247, 245, 240, 0.92);
+  margin-bottom: 18px;
+}
+.a-next {
+  font-size: 12px;
+  line-height: 1.9;
+  color: rgba(247, 245, 240, 0.65);
+  margin-bottom: 26px;
+  margin-top: auto;
+}
+.a-next span {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--tq);
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: var(--teal);
+  color: var(--white);
+  border-top: 1px solid rgba(247, 245, 240, 0.18);
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  padding-block: clamp(48px, 6vw, 72px) 40px;
+}
+.footer-logo .logo-text small { color: rgba(247, 245, 240, 0.7); }
+.footer-addr {
+  margin-top: 18px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: rgba(247, 245, 240, 0.8);
+}
+.footer-nav { display: flex; gap: clamp(32px, 5vw, 72px); }
+.footer-nav a {
+  display: block;
+  padding: 5px 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(247, 245, 240, 0.85);
+}
+.footer-nav a:hover { color: var(--tq); }
+.footer-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-block: 22px;
+  border-top: 1px solid rgba(247, 245, 240, 0.15);
+}
+.copyright { font-size: 11px; letter-spacing: 0.12em; color: rgba(247, 245, 240, 0.7); }
+.proto-note { font-size: 10px; letter-spacing: 0.2em; color: rgba(247, 245, 240, 0.6); }
+
+/* ==========================================================================
+   Reveal
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1120px) {
+  .header-textlink { display: none; }
+}
+
+@media (max-width: 960px) {
+  .global-nav, .header-actions { display: none; }
+  .menu-toggle { display: flex; }
+  :root { --header-h: 64px; }
+
+  .fv-inner { grid-template-columns: 1fr; min-height: 0; }
+  .fv-copy { padding: clamp(44px, 8vw, 64px) var(--pad) 8px; }
+  .fv-photo { padding: 28px var(--pad) 0; }
+  .guide-frame { min-height: 420px; height: auto; aspect-ratio: 4 / 5; }
+  .guide-caption { padding-bottom: 8px; }
+
+  .sodatsu-item { grid-template-columns: 1fr; gap: 14px; }
+  .jigyo-band { grid-template-columns: 1fr; }
+  .field-node::after { right: auto; width: 60px; left: 24px; }
+  .jigyo-field + .jigyo-field { border-left: none; border-top: 1px solid var(--line-soft); }
+  .jigyo-field h3 { margin-bottom: 16px; }
+  .field-copy { min-height: 0; }
+
+  .kyoten-map { grid-template-columns: 1fr; }
+  .hataraku-inner { grid-template-columns: 1fr; }
+
+  .chiiki-list a { grid-template-columns: 1fr auto; }
+  .c-who { grid-column: 1; }
+  .c-what { grid-column: 1; }
+  .c-arrow { grid-column: 2; grid-row: 1 / 3; align-self: center; }
+
+  .action-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sp { display: inline; }
+  body { font-size: 15px; }
+
+  .fv-title { font-size: clamp(29px, 8.4vw, 36px); }
+  .fv-title .l2 { padding-left: 0.6em; }
+  .fv-title .l3 { padding-left: 1.2em; }
+  .fv-lead { font-size: 14px; }
+  .fv-actions .btn { flex: 1 1 auto; }
+
+  .guide-copyarea { top: 16%; left: 5%; width: 34%; }
+  .guide-subject { left: 50%; width: clamp(80px, 26vw, 110px); }
+  .guide-mobile-band { left: 40%; width: 46%; }
+  .guide-depth { display: none; }
+
+  .sec-cta p { margin-right: 0; width: 100%; }
+  .sec-cta .btn { flex: 1 1 auto; }
+
+  .action-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; }
+  .footer-nav { gap: 40px; }
+  .footer-foot { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
