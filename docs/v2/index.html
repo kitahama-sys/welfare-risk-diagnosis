@@ -17,7 +17,7 @@
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <a href="index.html" class="logo" aria-label="あうん 株式会社阿吽 トップへ">
-      <img src="assets/logo.svg" alt="" class="logo-img">
+      <img src="assets/logo.png" alt="" class="logo-img">
       <span class="logo-text">あうん<small>株式会社阿吽</small></span>
     </a>
     <nav class="global-nav" aria-label="サイト内メニュー">
@@ -68,26 +68,23 @@
 
 <main id="main">
 
-<!-- ============ FV ============ -->
+<!-- ============ FV（全面写真×メインコピー。写真は実写撮影後に差し替え） ============ -->
 <section class="fv" id="top">
+  <div class="fv-photo" aria-hidden="true">
+    <img src="assets/fv-photo.png" alt="" onerror="this.remove()">
+  </div>
+  <div class="fv-scrim" aria-hidden="true"></div>
   <div class="fv-atmo" aria-hidden="true">
-    <span class="atmo-fill"></span>
-    <span class="atmo-line"></span>
-    <span class="atmo-dot"></span>
+    <div class="fv-ripples"><i></i><i></i><i></i><i></i></div>
   </div>
 
   <div class="fv-core">
-    <p class="fv-eyebrow fx fx-fade">滋賀・栗東と大津の総合福祉<span class="en">aun co., ltd.</span></p>
     <h1 class="fv-title">
       <span class="line l1"><span class="fx fx-rise">滋賀のふくしを、</span></span>
       <span class="line l2"><span class="fx fx-rise">支える場所から、</span></span>
-      <span class="line l3"><span class="ch emp fx fx-rise">育</span><span class="ch emp fx fx-rise">つ</span><span class="ch fx fx-rise">場</span><span class="ch fx fx-rise">所</span><span class="ch fx fx-rise">へ</span><span class="ch fx fx-rise">。</span></span>
+      <span class="line l3"><span class="fx fx-rise"><em class="emp">育</em><em class="emp">つ</em>場所へ。</span></span>
     </h1>
-    <p class="fv-lead fx fx-fade">福祉は、困っている人を支えるためだけのものではありません。支えられる人が自分らしい暮らしを取り戻す。働く人が、仕事を通じて成長する。地域にも、安心と可能性が広がっていく。あうんが目指すのは、人も、暮らしも、地域も育つ福祉です。</p>
-    <div class="fv-actions fx fx-fade">
-      <a href="soudan.html" class="btn btn-cta">相談する</a>
-      <a href="kengaku.html" class="btn btn-line">見学する</a>
-    </div>
+    <span class="aun-pair fv-pair fx fx-fade" aria-hidden="true"><i></i><i></i></span>
   </div>
 
   <div class="fv-foot">
@@ -99,17 +96,19 @@
   </div>
 </section>
 
-<!-- ============ MANIFESTO ============ -->
+<!-- ============ MANIFESTO（2ndビュー：ステートメント） ============ -->
 <section class="manifesto" id="manifesto">
   <span class="watermark" aria-hidden="true">育</span>
+  <span class="ripple mani-ripple" aria-hidden="true"></span>
   <div class="container manifesto-inner">
-    
+    <p class="mani-eyebrow fx fx-fade">滋賀・栗東と大津の総合福祉　あうん<span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
     <h2 class="mani-copy">
       <span class="row"><span class="fx fx-rise">支えて、</span></span>
       <span class="row"><span class="fx fx-rise">終わりにしない。</span></span>
     </h2>
     <p class="mani-sub fx fx-rise">人が<span class="emp">育つ</span>。暮らしが<span class="emp">育つ</span>。地域が<span class="emp">育つ</span>。</p>
-    <p class="mani-text fx fx-fade">あうんの言う「育つ」は、回復の物語でも、成長のスローガンでもありません。支える・支えられるという一方向の関係を終わらせて、関わる全員に役割と選択肢が生まれる状態をつくること。私たちはそれを、滋賀のまちで実際にやります。</p>
+    <p class="mani-text fx fx-fade">福祉は、困っている人を支えるためだけのものではありません。支えられる人が自分らしい暮らしを取り戻す。働く人が、仕事を通じて成長する。地域にも、安心と可能性が広がっていく。あうんが目指すのは、人も、暮らしも、地域も育つ福祉です。</p>
+    <p class="mani-place fx fx-fade">びわ湖のある県から、ふくしを育てる。</p>
   </div>
 </section>
 
@@ -117,7 +116,7 @@
 <section class="section sodatsu" id="sodatsu">
   <div class="container">
     <div class="section-head fx fx-rise">
-      <p class="sec-num"><span class="num en">01</span><span class="en">sodatsu</span><i></i></p>
+      <p class="sec-num"><span class="num">01</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">言葉ではなく、<br class="sp">仕組みにする。</h2>
       <p class="sec-intro">「育つ」を掲げるだけなら、誰にでもできます。人・暮らし・地域——三つの視点それぞれに、あうんの実装があります。</p>
     </div>
@@ -159,7 +158,7 @@
 
     <div class="sec-cta fx fx-fade">
       <p>まとまっていない話のままで、大丈夫です。</p>
-      <a href="soudan.html" class="btn btn-cta">相談する</a>
+      <a href="soudan.html" class="textlink">相談窓口を見る</a>
     </div>
   </div>
 </section>
@@ -176,15 +175,16 @@
 <section class="section jigyo" id="jigyo">
   <div class="container">
     <div class="section-head fx fx-rise">
-      <p class="sec-num"><span class="num en">02</span><span class="en">fields</span><i></i></p>
+      <p class="sec-num"><span class="num">02</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">介護も、福祉も、<br class="sp">子どもも。</h2>
       <p class="sec-intro">三つのフィールドは、別々の事業ではありません。同じまちの、同じ暮らしの中でつながっています。入口がどこでも、必要な支援へ渡します。</p>
     </div>
 
     <div class="field-rows">
       <article class="field-row fx fx-rise">
+        <span class="f-ghost" aria-hidden="true">介</span>
         <a href="care.html">
-          <h3 class="f-name">介護<span class="en">care</span></h3>
+          <h3 class="f-name">介護</h3>
           <div class="f-body">
             <p>高齢期の暮らしを、通い・泊まり・訪問で支える。</p>
             <ul class="f-services">
@@ -195,8 +195,9 @@
         </a>
       </article>
       <article class="field-row fx fx-rise">
+        <span class="f-ghost" aria-hidden="true">福</span>
         <a href="fukushi.html">
-          <h3 class="f-name">福祉<span class="en">fukushi</span></h3>
+          <h3 class="f-name">福祉</h3>
           <div class="f-body">
             <p>医療と暮らしの間を、看護でつなぐ。</p>
             <ul class="f-services">
@@ -207,8 +208,9 @@
         </a>
       </article>
       <article class="field-row fx fx-rise">
+        <span class="f-ghost" aria-hidden="true">子</span>
         <a href="kodomo.html">
-          <h3 class="f-name">子ども<span class="en">kodomo</span></h3>
+          <h3 class="f-name">子ども</h3>
           <div class="f-body">
             <p>放課後と長期休みに、育ちの時間と居場所を。</p>
             <ul class="f-services">
@@ -222,7 +224,7 @@
 
     <div class="sec-cta fx fx-fade">
       <p>どの窓口か迷ったら、相談から。</p>
-      <a href="soudan.html" class="btn btn-cta">相談する</a>
+      <a href="soudan.html" class="textlink">相談窓口を見る</a>
     </div>
   </div>
 </section>
@@ -232,7 +234,7 @@
   <span class="watermark" aria-hidden="true">場</span>
   <div class="container">
     <div class="section-head fx fx-rise">
-      <p class="sec-num"><span class="num en">03</span><span class="en">places</span><i></i></p>
+      <p class="sec-num"><span class="num">03</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">拠点は、<br class="sp">暮らしの距離にある。</h2>
       <p class="sec-intro">栗東市内に手原・手原西・出庭の三拠点、大津市に一拠点。同じ市内に拠点を重ねているから、通い・訪問・泊まりをひとつの体制で動かせます。</p>
     </div>
@@ -243,31 +245,31 @@
         <ol class="route-nodes">
           <li class="route-node">
             <span class="node-mark" aria-hidden="true"></span>
-            <p class="n-city en">Ritto</p>
+            <p class="n-city">栗東</p>
             <p class="n-name">あうん手原<span class="n-tag">本社</span></p>
             <p class="n-role">デイサービス（小規模）<br>ケアプランセンター</p>
           </li>
           <li class="route-node">
             <span class="node-mark" aria-hidden="true"></span>
-            <p class="n-city en">Ritto</p>
+            <p class="n-city">栗東</p>
             <p class="n-name">あうん手原西</p>
             <p class="n-role">訪問看護・訪問介護の拠点</p>
           </li>
           <li class="route-node">
             <span class="node-mark" aria-hidden="true"></span>
-            <p class="n-city en">Ritto</p>
+            <p class="n-city">栗東</p>
             <p class="n-name">あうん出庭</p>
             <p class="n-role">宿泊付きデイサービス</p>
           </li>
           <li class="route-node">
             <span class="node-mark" aria-hidden="true"></span>
-            <p class="n-city en">Ritto</p>
+            <p class="n-city">栗東</p>
             <p class="n-name">あうんキッズ栗東</p>
             <p class="n-role">放課後児童クラブ</p>
           </li>
           <li class="route-node is-far">
             <span class="node-mark" aria-hidden="true"></span>
-            <p class="n-city en">Otsu</p>
+            <p class="n-city">大津</p>
             <p class="n-name">あうん大津</p>
             <p class="n-role">訪問看護・リハビリ<br>あうんキッズ大津</p>
           </li>
@@ -276,7 +278,7 @@
       <p class="kyoten-note">各拠点の所在地・連絡先・受け入れ状況は、拠点・会社案内に掲載します。</p>
       <div class="route-cta">
         <p>空気は、来てみないと分かりません。</p>
-        <a href="kengaku.html" class="btn btn-cta">見学を申し込む</a>
+        <a href="kengaku.html" class="textlink">見学のご案内を見る</a>
       </div>
     </div>
   </div>
@@ -287,14 +289,14 @@
   <span class="watermark wm-light" aria-hidden="true">人</span>
   <div class="hataraku-inner container">
     <div class="section-head fx fx-rise">
-      <p class="sec-num"><span class="num en">04</span><span class="en">people</span><i></i></p>
+      <p class="sec-num"><span class="num">04</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">支える人が、<br><span class="emp">育つ</span>側にいる。</h2>
     </div>
     <div class="hataraku-body fx fx-rise">
       <p>福祉の仕事は、やさしさだけでは続きません。訪問看護、デイサービス、児童福祉——現場が複数あるということは、経験の積み方も、キャリアの行き先も、法人の中に選択肢があるということです。</p>
       <p>「いい支援をする人」で終わらせない。現場を動かす人へ、次の拠点をつくる人へ。阿吽の成長は、働く人の成長でできています。</p>
       <div class="sec-cta left">
-        <a href="recruit.html" class="btn btn-cta">採用情報を見る</a>
+        <a href="recruit.html" class="textlink">採用情報を見る</a>
         <p class="cta-note">募集職種・待遇・働き方は採用ページに掲載します。</p>
       </div>
     </div>
@@ -306,7 +308,7 @@
   <span class="watermark" aria-hidden="true">縁</span>
   <div class="container">
     <div class="section-head fx fx-rise">
-      <p class="sec-num"><span class="num en">05</span><span class="en">community</span><i></i></p>
+      <p class="sec-num"><span class="num">05</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">地域と、育て合う。</h2>
       <p class="sec-intro">阿吽のサービスだけで、地域の福祉は完成しません。事業者・行政・住民、それぞれの立場から始められる連携があります。</p>
     </div>
@@ -342,7 +344,7 @@
   <div class="actions-orb" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head inverse fx fx-rise">
-      <p class="sec-num"><span class="num en">06</span><span class="en">contact</span><i></i></p>
+      <p class="sec-num"><span class="num">06</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">ご用件ごとに、<br>専用の窓口があります。</h2>
       <p class="sec-intro">全員を同じフォームに集めることはしません。目的に合わせて、次の画面が分かれています。</p>
     </div>
@@ -360,21 +362,21 @@
         <h3>見学</h3>
         <p class="a-purpose">拠点と現場の空気を、契約の前に確かめる。</p>
         <p class="a-next"><span>次の画面</span>見学予約（希望拠点・日時を選択）</p>
-        <a href="kengaku.html" class="btn btn-white btn-full">見学を申し込む</a>
+        <a href="kengaku.html" class="btn btn-line btn-full">見学を申し込む</a>
       </li>
       <li class="action-card fx fx-rise" id="action-saiyo">
         <p class="a-num en">03</p>
         <h3>採用</h3>
         <p class="a-purpose">働き方と現場を知って、応募する。</p>
         <p class="a-next"><span>次の画面</span>採用情報（募集職種・待遇・現場紹介）</p>
-        <a href="recruit.html" class="btn btn-outline-w btn-full">採用情報へ</a>
+        <a href="recruit.html" class="btn btn-line btn-full">採用情報へ</a>
       </li>
       <li class="action-card fx fx-rise" id="action-renkei">
         <p class="a-num en">04</p>
         <h3>地域連携</h3>
         <p class="a-purpose">事業者・行政・住民として、協働を始める。</p>
         <p class="a-next"><span>次の画面</span>地域連携窓口（用件別の連絡先）</p>
-        <a href="renkei.html" class="btn btn-outline-w btn-full">連携の相談をする</a>
+        <a href="renkei.html" class="btn btn-line btn-full">連携の相談をする</a>
       </li>
     </ol>
   </div>
@@ -387,7 +389,7 @@
   <div class="container footer-inner">
     <div class="footer-id">
       <a href="index.html" class="logo footer-logo">
-        <img src="assets/logo.svg" alt="" class="logo-img">
+        <img src="assets/logo.png" alt="" class="logo-img">
         <span class="logo-text">あうん<small>株式会社阿吽</small></span>
       </a>
       <p class="footer-copy">滋賀のふくしを、<br>支える場所から、育つ場所へ。</p>
@@ -411,7 +413,7 @@
   </div>
   <div class="container footer-foot">
     <p class="copyright en">&copy; Aun Co., Ltd.</p>
-    <p class="proto-note en">design prototype v2.1 — 2026.07</p>
+    <p class="proto-note en">design prototype v3.0 — 2026.07</p>
   </div>
 </footer>
 
