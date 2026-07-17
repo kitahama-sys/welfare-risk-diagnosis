@@ -231,35 +231,40 @@ em, i { font-style: normal; }
   display: flex; flex-direction: column;
   padding-top: var(--header-h);
   overflow: clip;
-  color: var(--white);
-  background: linear-gradient(163deg, #33403C 0%, #293431 60%, #222C29 100%);
+  color: var(--teal);
+  /* 写真未設定時のフォールバック（空〜湖面の抽象グラデ） */
+  background: linear-gradient(180deg, #A5D6DE 0%, #D3ECE9 46%, #C2E5DB 60%, #7FC2AF 100%);
 }
 .fv-photo { position: absolute; inset: 0; }
 .fv-photo image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
 .fv-scrim {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(105deg, rgba(41,52,49,0.68) 0%, rgba(41,52,49,0.38) 46%, rgba(41,52,49,0.02) 74%),
-    radial-gradient(50% 60% at 92% 100%, rgba(212,129,81,0.20), transparent 62%),
-    linear-gradient(0deg, rgba(34,44,41,0.45), transparent 34%);
+    linear-gradient(180deg, rgba(24, 46, 56, 0.36) 0%, rgba(24, 46, 56, 0.10) 13%, transparent 24%),
+    radial-gradient(44% 40% at 76% 26%, rgba(24, 46, 56, 0.32), transparent 72%),
+    linear-gradient(0deg, rgba(24, 46, 56, 0.32), transparent 20%);
 }
 .fv-atmo { position: absolute; inset: 0; pointer-events: none; }
 .fv-ripples {
-  position: absolute; right: 3%; bottom: clamp(-340px, -24vw, -170px);
-  width: clamp(460px, 46vw, 820px); aspect-ratio: 1 / 1;
+  position: absolute; right: -5%; top: 20%;
+  width: clamp(440px, 44vw, 780px); aspect-ratio: 1 / 1;
 }
 .fv-ripples i { position: absolute; border-radius: 50%; }
-.fv-ripples i:nth-child(1) { inset: 0; background: radial-gradient(circle at 50% 36%, rgba(104,196,175,0.20), rgba(104,196,175,0.05) 56%, transparent 72%); }
-.fv-ripples i:nth-child(2) { inset: -9%; border: 1px solid rgba(252, 251, 248, 0.28); animation: breathe 8s ease-in-out infinite alternate; }
-.fv-ripples i:nth-child(3) { inset: -21%; border: 1px solid rgba(252, 251, 248, 0.18); animation: breathe 11s ease-in-out infinite alternate-reverse; }
-.fv-ripples i:nth-child(4) { inset: -35%; border: 1px solid rgba(252, 251, 248, 0.10); animation: breathe 14s ease-in-out infinite alternate; }
+.fv-ripples i:nth-child(1) { inset: 0; background: radial-gradient(circle at 50% 40%, rgba(252,251,248,0.14), rgba(252,251,248,0.04) 56%, transparent 72%); }
+.fv-ripples i:nth-child(2) { inset: -6%; border: 1px solid rgba(252, 251, 248, 0.60); animation: breathe 8s ease-in-out infinite alternate; }
+.fv-ripples i:nth-child(3) { inset: -20%; border: 1px solid rgba(252, 251, 248, 0.28); animation: breathe 11s ease-in-out infinite alternate-reverse; }
+.fv-ripples i:nth-child(4) { inset: -34%; border: 1px solid rgba(252, 251, 248, 0.14); animation: breathe 14s ease-in-out infinite alternate; }
 @keyframes breathe { from { transform: scale(1); } to { transform: scale(1.035); } }
 
 .fv-core {
   flex: 1;
   position: relative;
   pointer-events: none;
-  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-rows: auto auto auto auto;
+  align-content: center;
+  column-gap: clamp(20px, 3vw, 48px);
   width: 100%; max-width: 1240px;
   margin-inline: auto;
   padding: clamp(24px, 4vh, 56px) var(--pad) clamp(28px, 5vh, 64px);
@@ -280,30 +285,63 @@ em, i { font-style: normal; }
 .fv-eyebrow .en { font-size: 14px; font-weight: 500; color: var(--tq); letter-spacing: 0.12em; }
 
 .fv-title {
-  position: relative;
+  display: contents;
   font-family: var(--serif);
-  color: #FFFFFF;
+  color: var(--teal);
   letter-spacing: 0.1em;
-  text-shadow: 0 2px 18px rgba(34, 44, 41, 0.55), 0 8px 70px rgba(34, 44, 41, 0.5);
 }
-.fv-title .line { display: block; overflow: hidden; line-height: 1.58; }
+.fv-title .line {
+  display: block; overflow: hidden; line-height: 1.58;
+  font-family: var(--serif);
+  text-shadow: 0 2px 20px rgba(252, 251, 248, 0.7), 0 0 52px rgba(252, 251, 248, 0.45);
+}
 .fv-title .line > span { display: inline-block; }
-.fv-title .l1, .fv-title .l2 { font-size: clamp(32px, 4.4vw, 72px); font-weight: 700; }
-.fv-title .l2 { padding-inline-start: 1em; }
-.fv-title .l3 { font-size: clamp(54px, 8.2vw, 132px); font-weight: 900; line-height: 1.3; margin-top: clamp(10px, 1.6vh, 22px); }
+.fv-title .l1, .fv-title .l2 { grid-column: 1; font-size: clamp(30px, 4.2vw, 66px); font-weight: 700; }
+.fv-title .l1 { grid-row: 1; }
+.fv-title .l2 { grid-row: 2; }
+/* 水平線（湖面）— 画面幅いっぱいに引き、3行目をその下へ */
+.fv-title .l3 {
+  grid-column: 1 / -1; grid-row: 3;
+  position: relative;
+  text-align: right;
+  font-size: clamp(48px, 7.4vw, 118px); font-weight: 900; line-height: 1.3;
+  margin-top: clamp(26px, 5.5vh, 64px);
+  padding: clamp(22px, 4.5vh, 48px) clamp(10px, 5vw, 90px) 0 0;
+}
+.fv-title .l3 { overflow: visible; }
+.fv-title .l3::before {
+  content: "";
+  position: absolute; top: 0;
+  left: calc(50% - 50vw); width: 100vw; height: 1px;
+  background: rgba(41, 52, 49, 0.55);
+}
+@supports selector(:has(*)) {
+  .fv-title .l3::before { transform: scaleX(0); transform-origin: left; transition: transform 1.8s var(--ease) 0.5s; }
+  .fv-title .l3:has(.fx.on)::before { transform: scaleX(1); }
+}
 .fv-title .emp {
   -webkit-text-emphasis: filled sesame var(--orange);
   text-emphasis: filled sesame var(--orange);
   background: none;
 }
-.fv-pair { margin-top: clamp(26px, 3.4vh, 44px); margin-left: 14px; }
+.fv-pair {
+  grid-column: 1 / -1; grid-row: 4;
+  justify-self: end;
+  margin-top: clamp(18px, 2.6vh, 32px);
+  margin-right: clamp(10px, 5vw, 90px);
+}
 .fv .aun-pair i:first-child { border-color: rgba(252, 251, 248, 0.9); }
 .fv-lead {
-  margin-top: clamp(22px, 3.6vh, 40px);
-  max-width: 37em;
-  font-size: 14.5px; line-height: 2.3; font-weight: 500;
-  color: rgba(252, 251, 248, 0.94);
+  grid-column: 2; grid-row: 1 / span 2;
+  justify-self: end; align-self: start;
+  margin-top: clamp(6px, 1.6vh, 22px);
+  max-width: 34em;
+  font-size: 14px; line-height: 2.35; font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+  text-shadow: 0 1px 16px rgba(24, 46, 56, 0.55), 0 0 38px rgba(24, 46, 56, 0.35);
 }
+.fv-lead span { display: block; }
 .fv-place {
   display: flex; align-items: center; gap: 12px;
   margin-top: clamp(20px, 3.2vh, 34px);
@@ -443,7 +481,9 @@ em, i { font-style: normal; }
 .fx { opacity: 0; }
 .fx-fade { transition: opacity 1.6s var(--ease) 0.1s; }
 .fx-rise { transform: translateY(30px); transition: opacity 1.3s var(--ease), transform 1.3s var(--ease); }
-.fv-title .fx-rise, .mani-copy .fx-rise { transform: translateY(110%); transition-duration: 1.4s; }
+.fv-title :where(.l1, .l2) .fx-rise, .mani-copy .fx-rise { transform: translateY(110%); transition-duration: 1.4s; }
+/* l3はクリップ無し（水平線の罫が箱の外へ伸びるため）— 控えめなライズに */
+:where(.fv-title .l3) .fx-rise { transform: translateY(46px); transition-duration: 1.4s; }
 .fx.on { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -901,11 +941,8 @@ em, i { font-style: normal; }
   .sp { display: inline; }
   body { font-size: 15px; }
 
-  .fv-core { align-items: stretch; }
-  .fv-title .l1, .fv-title .l2 { font-size: clamp(24px, 7vw, 32px); }
-  .fv-title .l2 { padding-inline-start: 1em; }
-  .fv-title .l3 { font-size: clamp(42px, 12vw, 58px); }
-  .fv-actions .btn { flex: 1 1 auto; }
+  .fv-title .l1, .fv-title .l2 { font-size: clamp(26px, 7.4vw, 34px); }
+  .fv-title .l3 { font-size: clamp(40px, 11.4vw, 56px); }
 
   .mani-copy { font-size: clamp(30px, 8.6vw, 40px); }
   .mani-sub { font-size: clamp(17px, 5vw, 21px); }
@@ -948,17 +985,38 @@ em, i { font-style: normal; }
 .hataraku .textlink:hover::after { background: rgba(41, 52, 49, 0.1); border-color: var(--teal); }
 .hataraku .sec-cta.left .cta-note { color: rgba(41, 52, 49, 0.85); }
 
-/* 暗いFVの上に出る透明ヘッダーは白文字で */
-.home .site-header:not(.is-solid) .global-nav > ul > li > a { color: var(--white); }
-.home .site-header:not(.is-solid) .header-textlink { color: var(--white); }
-.home .site-header:not(.is-solid) .header-actions .btn-line {
-  border-color: rgba(252, 251, 248, 0.55); color: var(--white);
+/* 写真FVの上に出る透明ヘッダーは白文字で（ロゴも表示）
+   ※モバイルはヘッダー常時ソリッドのためデスクトップ幅のみ */
+.home .site-header:not(.is-solid) .logo { opacity: 1; pointer-events: auto; }
+@media (min-width: 1021px) {
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .global-nav > ul > li > a { color: var(--white); }
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .header-textlink { color: var(--white); }
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .logo-text { color: #FFFFFF; }
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .logo-text small { color: rgba(252, 251, 248, 0.82); }
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .header-actions .btn-line {
+    border-color: rgba(252, 251, 248, 0.55); color: var(--white);
+  }
+  .home:not(.no-fv-photo) .site-header:not(.is-solid) .header-actions .btn-line:hover {
+    background: rgba(252, 251, 248, 0.12); border-color: var(--white); color: var(--white);
+  }
 }
-.home .site-header:not(.is-solid) .header-actions .btn-line:hover {
-  background: rgba(252, 251, 248, 0.12); border-color: var(--white); color: var(--white);
+
+/* FV 2カラム→1カラム（リードは2ndビューが担うため非表示） */
+@media (max-width: 900px) {
+  .fv-core { grid-template-columns: 1fr; }
+  .fv-lead { display: none; }
 }
-@media (max-width: 1020px) {
-  /* モバイルはヘッダー常時ソリッドのため上書き不要 */
-  .home .site-header:not(.is-solid) .global-nav > ul > li > a,
-  .home .site-header:not(.is-solid) .header-textlink { color: var(--teal); }
+@media (max-width: 640px) {
+  .fv-pair { margin-top: 36px; }
 }
+
+/* 写真未設定時（フォールバック表示）の調整 */
+.no-fv-photo .fv-scrim { display: none; }
+.no-fv-photo .fv-lead { color: var(--teal); text-shadow: none; font-weight: 500; }
+.no-fv-photo .fv .aun-pair i:first-child { border-color: var(--tq-ink); }
+.no-fv-photo .fv-ripples i:nth-child(1) { background: radial-gradient(circle at 50% 40%, rgba(104,196,175,0.16), rgba(104,196,175,0.05) 56%, transparent 72%); }
+.no-fv-photo .fv-ripples i:nth-child(2) { border-color: rgba(46, 130, 112, 0.30); }
+.no-fv-photo .fv-ripples i:nth-child(3) { border-color: rgba(46, 130, 112, 0.18); }
+.no-fv-photo .fv-ripples i:nth-child(4) { border-color: rgba(46, 130, 112, 0.10); }
+.no-fv-photo .fv-foot { background: rgba(41, 52, 49, 0.04); border-top-color: rgba(41, 52, 49, 0.14); }
+.no-fv-photo .fv .ticker-track span { color: var(--teal-70); }
