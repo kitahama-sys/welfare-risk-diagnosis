@@ -1,6 +1,8 @@
 /* AUN Corporate Site V2.1 */
 (function () {
   "use strict";
+  // JavaScript が読み込めない環境では、内容を隠さずそのまま読める状態を保つ。
+  document.documentElement.classList.add("js");
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -18,20 +20,28 @@
   /* mobile menu */
   var toggle = document.getElementById("menu-toggle");
   var menu = document.getElementById("mobile-menu");
+  var menuTrigger = null;
   function closeMenu() {
     toggle.setAttribute("aria-expanded", "false");
     menu.hidden = true;
     document.body.style.overflow = "";
+    if (menuTrigger) menuTrigger.focus();
   }
   toggle.addEventListener("click", function () {
     var open = toggle.getAttribute("aria-expanded") === "true";
     if (open) { closeMenu(); return; }
+    menuTrigger = document.activeElement;
     toggle.setAttribute("aria-expanded", "true");
     menu.hidden = false;
     document.body.style.overflow = "hidden";
+    var firstMenuLink = menu.querySelector("a");
+    if (firstMenuLink) firstMenuLink.focus();
   });
   menu.addEventListener("click", function (e) {
     if (e.target.closest("a")) closeMenu();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") closeMenu();
   });
 
   /* hero: reveal on load (クリップされた行はIOに映らないため直接発火) */
