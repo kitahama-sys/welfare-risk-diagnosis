@@ -965,7 +965,8 @@ em, i { font-style: normal; }
   .page-hero-media { width: min(33vw, 330px); }
 }
 @media (max-width: 640px) {
-  .sp { display: inline; }
+  /* 意図した区切りは保ち、単語の途中で折り返さない。 */
+  .sp { display: block; }
   body { font-size: 15px; }
   .logo-text { font-size: 20px; }
   .logo-text small { display: none; }
@@ -974,6 +975,7 @@ em, i { font-style: normal; }
   .fv-title .l3 { font-size: clamp(40px, 11.4vw, 56px); }
 
   .mani-copy { font-size: clamp(30px, 8.6vw, 40px); }
+  .mani-copy .row + .row > span { padding-left: 0; white-space: nowrap; }
   .mani-sub { font-size: clamp(17px, 5vw, 21px); }
 
   .f-name { font-size: clamp(34px, 10vw, 44px); gap: 14px; }
@@ -1100,7 +1102,7 @@ em, i { font-style: normal; }
   /* 地図を立体オブジェクトにしない。地域性を担う、静かな写真の器として扱う。 */
 }
 .fv-new-lake::after { content: ""; position: absolute; inset: 0; background: linear-gradient(145deg, rgba(252,251,248,0.18), rgba(46,130,112,0.10)); pointer-events: none; }
-.fv-new-lake img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 74% center; filter: saturate(0.78) contrast(0.96); }
+.fv-new-lake img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 74% center; filter: saturate(0.78) contrast(0.96); transform: scale(1.04); }
 .fv-new-copy {
   width: min(100% - 2 * var(--pad), 1240px);
   margin-inline: auto;
@@ -1120,18 +1122,31 @@ em, i { font-style: normal; }
 .quick-guide-inner { display: grid; grid-template-columns: minmax(300px, 0.85fr) minmax(440px, 1.15fr); gap: clamp(48px, 8vw, 120px); align-items: start; }
 .quick-guide-kicker, .updates-kicker { font-family: var(--en); font-size: 16px; letter-spacing: 0.14em; color: var(--tq-ink); }
 .quick-guide-kicker::before { content: ""; display: inline-block; width: 34px; height: 1px; margin: 0 12px 0 1px; vertical-align: middle; background: var(--orange); }
-.quick-guide h2 { margin-top: 20px; font-family: var(--serif); font-size: clamp(26px, 2.6vw, 38px); font-weight: 900; line-height: 1.68; letter-spacing: 0.08em; }
-.quick-guide-copy > p:not(.quick-guide-kicker) { max-width: 31em; margin-top: 20px; font-size: 14px; line-height: 2.25; color: var(--teal-70); }
+.quick-guide h2 { margin-top: 20px; font-family: var(--serif); font-size: clamp(28px, 2.8vw, 40px); font-weight: 900; line-height: 1.48; letter-spacing: 0.06em; }
+.quick-guide-copy > p:not(.quick-guide-kicker) { max-width: 31em; margin-top: 20px; font-size: 14px; line-height: 2; color: var(--teal-70); }
 .quick-guide-copy .textlink { margin-top: 28px; }
 .quick-guide-list { border-top: 1px solid var(--teal); }
 .quick-guide-list li { border-bottom: 1px solid var(--line); }
-.quick-guide-list a { display: grid; grid-template-columns: 38px minmax(210px, .9fr) minmax(150px, 1.1fr) auto; gap: 18px; align-items: center; padding: 22px 8px; transition: padding 0.25s var(--ease), background-color 0.25s var(--ease); }
+.quick-guide-list a { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 18px; align-items: center; min-height: 76px; padding: 18px 8px; transition: padding 0.25s var(--ease), background-color 0.25s var(--ease); }
 .quick-guide-list a:hover { padding-inline: 18px 8px; background: var(--tq-06); }
 .quick-num { font-family: var(--en); font-size: 16px; color: var(--tq-ink); letter-spacing: 0.12em; }
 .quick-label { font-family: var(--serif); font-size: clamp(17px, 1.5vw, 19px); font-weight: 900; letter-spacing: 0.06em; white-space: nowrap; }
-.quick-desc { font-size: 12.5px; line-height: 1.8; color: var(--teal-70); }
 .quick-arrow { font-family: var(--en); font-size: 22px; color: var(--cta); transition: transform 0.25s var(--ease); }
 .quick-guide-list a:hover .quick-arrow { transform: translateX(5px); }
+
+/* 琵琶湖の中の景色だけをゆっくり動かし、地域の時間の流れを伝える。 */
+@media (prefers-reduced-motion: no-preference) {
+  .fv-new::before { animation: fv-ripple-breathe 18s ease-in-out infinite alternate; }
+  .fv-new-lake img { animation: fv-lake-drift 20s ease-in-out infinite alternate; will-change: transform; }
+}
+@keyframes fv-lake-drift {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to { transform: scale(1.13) translate3d(-2.5%, -1.5%, 0); }
+}
+@keyframes fv-ripple-breathe {
+  from { transform: scale(1) translate3d(0, 0, 0); opacity: 0.72; }
+  to { transform: scale(1.025) translate3d(1.2%, -1%, 0); opacity: 1; }
+}
 
 /* WordPressの更新資産をホームの価値として見せる。 */
 .updates { background: linear-gradient(180deg, rgba(104,196,175,0.08), rgba(252,251,248,0.24) 68%, transparent); }
@@ -1176,9 +1191,8 @@ em, i { font-style: normal; }
   .fv-new-actions { gap: 16px 20px; }
   .fv-new-actions .btn { padding: 15px 22px; font-size: 13px; }
   .quick-guide { padding-block: 58px; }
-  .quick-guide-list a { grid-template-columns: 28px 1fr auto; gap: 10px; padding-block: 18px; }
-  .quick-desc { grid-column: 2 / -1; }
-  .quick-label { font-size: 18px; }
+  .quick-guide-list a { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; min-height: 68px; padding-block: 16px; }
+  .quick-label { font-size: clamp(16px, 4.6vw, 18px); }
   .updates-feature a { grid-template-columns: 1fr; gap: 20px; }
   .updates-feature img { aspect-ratio: 1.55; }
   .updates-list li a { grid-template-columns: 90px 1fr auto; gap: 12px; }
