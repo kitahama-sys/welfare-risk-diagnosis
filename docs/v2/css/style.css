@@ -895,6 +895,8 @@ em, i { font-style: normal; }
 .footer-nav a:hover { color: var(--tq); }
 .footer-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 22px; border-top: 1px solid rgba(252,251,248,0.14); }
 .copyright { font-size: 12px; letter-spacing: 0.12em; color: rgba(252,251,248,0.7); }
+.geo-attribution { font-size: 10px; letter-spacing: 0.07em; color: rgba(252,251,248,0.56); }
+.geo-attribution:hover { color: var(--tq); }
 .proto-note { font-size: 11px; letter-spacing: 0.2em; color: rgba(252,251,248,0.6); }
 
 /* ==========================================================================
@@ -1020,3 +1022,77 @@ em, i { font-style: normal; }
 .no-fv-photo .fv-ripples i:nth-child(4) { border-color: rgba(46, 130, 112, 0.10); }
 .no-fv-photo .fv-foot { background: rgba(41, 52, 49, 0.04); border-top-color: rgba(41, 52, 49, 0.14); }
 .no-fv-photo .fv .ticker-track span { color: var(--teal-70); }
+
+/* ===========================================================================
+   FV v2：コピーを主役に。写真は阿吽が寄り添う日常と滋賀の場所性を担う。
+   ========================================================================== */
+.fv {
+  min-height: 100dvh;
+  color: var(--white);
+}
+.fv-atmo { display: none; }
+.fv-scrim {
+  background:
+    linear-gradient(90deg, rgba(17, 49, 55, 0.34) 0%, rgba(17, 49, 55, 0.20) 38%, rgba(17, 49, 55, 0.06) 64%, transparent 100%),
+    linear-gradient(180deg, rgba(17, 49, 55, 0.18) 0%, transparent 32%, rgba(17, 49, 55, 0.12) 100%);
+}
+.fv-core {
+  z-index: 3;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  align-content: center;
+  padding: clamp(42px, 7vh, 84px) var(--pad) clamp(52px, 8vh, 104px);
+}
+.fv-title { color: var(--white); }
+.fv-title .line { text-shadow: 0 3px 24px rgba(8, 35, 40, 0.36); }
+.fv-title .l3 {
+  grid-column: 1;
+  grid-row: 3;
+  text-align: left;
+  font-size: clamp(48px, 7.2vw, 112px);
+  line-height: 1.28;
+  margin-top: clamp(18px, 3.4vh, 36px);
+  padding: 0;
+}
+.fv-title .l3::before { display: none; }
+.fv-card {
+  width: min(100%, 710px);
+  padding: clamp(28px, 4.2vw, 58px);
+  background: rgba(12, 31, 33, 0.58);
+  border: 1px solid rgba(252, 251, 248, 0.28);
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(8, 35, 40, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.fv-photo { background: #183F42; }
+.fv-photo > .fv-slide { position: absolute; inset: 0; opacity: 0; animation: fvScene 27s infinite; }
+.fv-photo > .fv-slide-kids { animation-delay: 9s; }
+.fv-photo > .fv-slide-community { animation-delay: 18s; }
+.fv-photo > .fv-slide img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center; filter: saturate(0.88) brightness(1.06); }
+.fv-biwa-mark {
+  position: absolute;
+  z-index: 2;
+  right: clamp(5%, 9vw, 14%);
+  bottom: clamp(7%, 9vh, 14%);
+  width: clamp(150px, 19vw, 290px);
+  opacity: 0.54;
+  pointer-events: none;
+}
+@keyframes fvScene {
+  0%, 27% { opacity: 1; transform: scale(1); }
+  33%, 100% { opacity: 0; transform: scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fv-photo > .fv-slide { animation: none; opacity: 0; }
+  .fv-photo > .fv-slide-care { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .fv-core { padding-top: clamp(34px, 8vh, 60px); padding-bottom: clamp(46px, 9vh, 78px); }
+  .fv-title .l1, .fv-title .l2 { font-size: clamp(27px, 7.4vw, 36px); }
+  .fv-title .l3 { font-size: clamp(42px, 11.2vw, 58px); }
+  .fv-card { padding: 28px 24px 32px; border-radius: 20px; }
+  .fv-biwa-mark { right: 7%; bottom: 7%; width: 130px; opacity: 0.42; }
+  .fv-scrim { background: linear-gradient(90deg, rgba(17, 49, 55, 0.48), rgba(17, 49, 55, 0.18) 72%, rgba(17, 49, 55, 0.04)); }
+}
