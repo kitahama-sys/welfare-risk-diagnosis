@@ -623,7 +623,10 @@ em, i { font-style: normal; }
 .hataraku .section-head { margin-bottom: 0; }
 .hataraku .sec-num .en { color: var(--teal); }
 .hataraku .sec-num i { background: var(--white); }
-.hataraku .emp { -webkit-text-emphasis-color: var(--white); text-emphasis-color: var(--white); }
+.hataraku .sec-title .emp {
+  -webkit-text-emphasis: none;
+  text-emphasis: none;
+}
 .hataraku-body p { max-width: 40em; font-size: 15px; line-height: 2.3; font-weight: 500; }
 .hataraku-body p + p { margin-top: 1.6em; }
 .hataraku-body .sec-cta { margin-top: 42px; }
@@ -691,10 +694,10 @@ em, i { font-style: normal; }
 .a-purpose { font-size: 13.5px; line-height: 2.05; color: var(--teal); margin-bottom: 18px; }
 .a-next { font-size: 12px; line-height: 1.9; color: var(--teal-70); margin-bottom: 26px; margin-top: auto; }
 .a-next span { display: block; font-size: 10.5px; letter-spacing: 0.18em; color: var(--tq-ink); margin-bottom: 4px; }
-.action-final { position: relative; display: grid; grid-template-columns: minmax(280px, .88fr) minmax(380px, 1.12fr); gap: clamp(40px, 7vw, 110px); align-items: center; padding-top: 12px; }
-.action-primary { padding: clamp(28px, 4vw, 48px); border-left: 2px solid var(--orange); background: rgba(252,251,248,.46); }
+.action-final { position: relative; display: grid; grid-template-columns: minmax(430px, .93fr) minmax(370px, 1.07fr); gap: clamp(40px, 7vw, 96px); align-items: center; padding-top: 12px; }
+.action-primary { padding: clamp(28px, 3vw, 38px); border-left: 2px solid var(--orange); background: rgba(252,251,248,.46); }
 .action-kicker { font-family: var(--en); font-size: 15px; letter-spacing: .14em; color: var(--tq-ink); }
-.action-primary h3 { margin-top: 18px; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.55; letter-spacing: .08em; }
+.action-primary h3 { margin-top: 18px; font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3vw, 42px); line-height: 1.45; letter-spacing: .05em; }
 .action-primary > p:not(.action-kicker) { max-width: 32em; margin-top: 18px; font-size: 14px; line-height: 2.2; color: var(--teal-70); }
 .action-primary .btn { margin-top: 28px; }
 .action-links { border-top: 1px solid var(--teal); }
