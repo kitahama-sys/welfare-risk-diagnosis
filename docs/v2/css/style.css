@@ -1192,11 +1192,11 @@ em, i { font-style: normal; }
 .card-flowers { left: 4%; top: 2%; width: clamp(190px, 21vw, 326px); }
 .card-birdhouse { left: 31%; top: 8%; width: clamp(165px, 18vw, 270px); }
 .card-painting { right: 7%; top: 1%; width: clamp(205px, 24vw, 354px); }
-.card-sprout { right: 29%; top: 40%; width: clamp(155px, 17vw, 240px); }
+.card-sprout { right: 35%; top: 40%; width: clamp(155px, 17vw, 240px); }
 .card-bicycle { left: 3%; bottom: 3%; width: clamp(190px, 21vw, 316px); }
 .card-bread { left: 29%; bottom: 2%; width: clamp(170px, 18vw, 270px); }
-.card-airplane { right: 6%; bottom: 4%; width: clamp(198px, 22vw, 330px); }
-.card-camera { right: 43%; top: 57%; width: clamp(128px, 14vw, 186px); }
+.card-airplane { right: 6%; bottom: 2%; width: clamp(198px, 22vw, 330px); }
+.card-camera { left: 51%; right: auto; top: 69%; width: clamp(128px, 14vw, 186px); }
 
 .growth-burst {
   position: relative;
