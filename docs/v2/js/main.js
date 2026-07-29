@@ -72,6 +72,25 @@
     }
   }
 
+  /* top story: 写真はスクロールで現れ、地域の器から外へ広がる */
+  [".growth-story", ".growth-burst"].forEach(function (selector) {
+    var scene = document.querySelector(selector);
+    if (!scene) return;
+    if (reduced || !("IntersectionObserver" in window)) {
+      scene.classList.add("is-active");
+      return;
+    }
+    var sceneObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          scene.classList.add("is-active");
+          sceneObserver.disconnect();
+        }
+      });
+    }, { threshold: selector === ".growth-burst" ? 0.18 : 0.12 });
+    sceneObserver.observe(scene);
+  });
+
   /* generic reveal */
   var targets = Array.prototype.filter.call(document.querySelectorAll(".fx"), function (el) {
     return !el.closest(".fv, .page-hero, .manifesto");
