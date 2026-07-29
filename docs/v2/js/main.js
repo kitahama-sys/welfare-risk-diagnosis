@@ -51,6 +51,16 @@
     setTimeout(function () { el.classList.add("on"); }, 160 + i * 130);
   });
 
+  /* FV：琵琶湖を起点に写真が外へひろがる。コピーが落ち着いてから動かす。 */
+  var fvNew = document.querySelector(".fv-new");
+  if (fvNew) {
+    if (reduced) {
+      fvNew.classList.add("is-expanded");
+    } else {
+      setTimeout(function () { fvNew.classList.add("is-expanded"); }, 260);
+    }
+  }
+
   /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */
   var mani = document.querySelector(".manifesto");
   if (mani) {
@@ -71,25 +81,6 @@
       mio.observe(mani);
     }
   }
-
-  /* top story: 写真はスクロールで現れ、地域の器から外へ広がる */
-  [".growth-story", ".growth-burst"].forEach(function (selector) {
-    var scene = document.querySelector(selector);
-    if (!scene) return;
-    if (reduced || !("IntersectionObserver" in window)) {
-      scene.classList.add("is-active");
-      return;
-    }
-    var sceneObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          scene.classList.add("is-active");
-          sceneObserver.disconnect();
-        }
-      });
-    }, { threshold: selector === ".growth-burst" ? 0.18 : 0.12 });
-    sceneObserver.observe(scene);
-  });
 
   /* generic reveal */
   var targets = Array.prototype.filter.call(document.querySelectorAll(".fx"), function (el) {
