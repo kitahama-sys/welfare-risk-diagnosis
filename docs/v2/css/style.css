@@ -1326,10 +1326,10 @@ em, i { font-style: normal; }
 }
 .fv-new-lake {
   z-index: 0; left: 50%; right: auto; top: 51%; width: min(28vw, 390px); height: min(58vh, 590px);
-  opacity: .27; transform: translate(-50%, -50%);
+  opacity: .50; transform: translate(-50%, -50%);
 }
-.fv-new-lake::after { background: linear-gradient(145deg, rgba(237,245,242,.48), rgba(237,245,242,.70)); }
-.fv-new-lake img { object-position: 70% center; filter: saturate(.72) contrast(.93); transform: scale(1.15); }
+.fv-new-lake::after { background: linear-gradient(145deg, rgba(237,245,242,.24), rgba(237,245,242,.44)); }
+.fv-new-lake img { object-position: 70% center; filter: saturate(.85) contrast(.98); transform: scale(1.15); }
 .fv-photo-field {
   position: absolute; z-index: 1; inset: 0; width: min(100% - 2 * var(--pad), 1240px); height: 100%;
   margin-inline: auto; pointer-events: none;
@@ -1368,7 +1368,7 @@ em, i { font-style: normal; }
 @keyframes fv-photo-idle { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(var(--idle-x), var(--idle-y), 0) scale(1); } }
 @media (max-width: 900px) {
   .fv-new { min-height: 100dvh; padding-top: 0; }
-  .fv-new-lake { top: 53%; width: min(58vw, 340px); height: min(60vh, 520px); opacity: .20; }
+  .fv-new-lake { top: 53%; width: min(58vw, 340px); height: min(60vh, 520px); opacity: .38; }
   .fv-photo-field { width: 100%; }
   .fv-photo { border-radius: 9px; }
   .fv-photo-flowers { left: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; --arrival-x: 3px; --arrival-y: 0px; }
