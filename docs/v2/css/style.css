@@ -1330,36 +1330,35 @@ em, i { font-style: normal; }
 }
 .js .fv-photo {
   opacity: 0;
-  transform: scale(.68);
-  transform-origin: var(--reveal-origin, center);
-  transition: opacity 1s cubic-bezier(.16,.84,.28,1) var(--delay), transform 1.2s cubic-bezier(.16,.84,.28,1) var(--delay);
+  transform: translate3d(var(--arrival-x, 0), var(--arrival-y, 8px), 0) scale(.97);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1) var(--delay), transform 1.2s cubic-bezier(.22,1,.36,1) var(--delay);
 }
-.js .fv-new.is-expanded .fv-photo { opacity: 1; transform: scale(1); }
-.fv-photo-flowers { left: 1%; top: 15%; --photo-w: 20%; --reveal-origin: right bottom; }
-.fv-photo-birdhouse { left: 56%; top: 15%; --photo-w: 13%; --reveal-origin: left bottom; }
-.fv-photo-airplane { right: 0; top: 27%; --photo-w: 22%; --photo-ratio: 1.34 / 1; --reveal-origin: left center; }
-.fv-photo-painting { left: 3%; bottom: 12%; --photo-w: 18%; --reveal-origin: right top; }
-.fv-photo-camera { right: 8%; bottom: 7%; --photo-w: 15%; --reveal-origin: left top; }
-.fv-photo-sprout { left: 34%; top: 16%; --photo-w: 9%; --reveal-origin: center bottom; }
-.fv-photo-bicycle { right: 33%; bottom: 5%; --photo-w: 11%; --reveal-origin: center top; }
-.fv-photo-bread { left: 28%; bottom: 5%; --photo-w: 11%; --reveal-origin: center top; }
+.js .fv-new.is-expanded .fv-photo { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+.fv-photo-flowers { left: 1%; top: 15%; --photo-w: 20%; --arrival-x: 9px; --arrival-y: 10px; }
+.fv-photo-birdhouse { left: 56%; top: 15%; --photo-w: 13%; --arrival-x: -7px; --arrival-y: 9px; }
+.fv-photo-airplane { right: 0; top: 27%; --photo-w: 22%; --photo-ratio: 1.34 / 1; --arrival-x: -10px; --arrival-y: 2px; }
+.fv-photo-painting { left: 3%; bottom: 12%; --photo-w: 18%; --arrival-x: 9px; --arrival-y: -8px; }
+.fv-photo-camera { right: 8%; bottom: 7%; --photo-w: 15%; --arrival-x: -8px; --arrival-y: -8px; }
+.fv-photo-sprout { left: 34%; top: 16%; --photo-w: 9%; --arrival-y: 7px; }
+.fv-photo-bicycle { right: 33%; bottom: 5%; --photo-w: 11%; --arrival-x: -4px; --arrival-y: -7px; }
+.fv-photo-bread { left: 28%; bottom: 5%; --photo-w: 11%; --arrival-x: 4px; --arrival-y: -7px; }
 .fv-new-copy {
   position: relative; z-index: 2; display: grid; place-items: center; width: min(100% - 2 * var(--pad), 880px); padding-top: 0;
 }
 .fv-new-title { max-width: none; margin-top: 0; font-size: clamp(40px, 4.4vw, 70px); line-height: 1.5; text-align: center; text-shadow: 0 1px 18px rgba(237,245,242,.72); }
 .fv-new-title span:nth-child(3) { color: var(--teal); }
-@media (prefers-reduced-motion: no-preference) { .fv-new-lake img { animation: fv-lake-pan 10s cubic-bezier(.45,0,.2,1) infinite alternate; } }
+@media (prefers-reduced-motion: no-preference) { .fv-new-lake img { animation: fv-lake-pan 18s cubic-bezier(.45,0,.2,1) infinite alternate; } }
 @media (prefers-reduced-motion: reduce) { .fv-photo { opacity: 1; transform: none; transition: none; } }
-@keyframes fv-lake-pan { from { transform: scale(1.10) translate3d(7%, 4%, 0); } to { transform: scale(1.32) translate3d(-10%, -7%, 0); } }
+@keyframes fv-lake-pan { from { transform: scale(1.13) translate3d(1.5%, 1%, 0); } to { transform: scale(1.19) translate3d(-1.5%, -1%, 0); } }
 @media (max-width: 900px) {
   .fv-new { min-height: 100dvh; padding-top: 0; }
   .fv-new-lake { top: 53%; width: min(58vw, 340px); height: min(60vh, 520px); opacity: .20; }
   .fv-photo-field { width: 100%; }
   .fv-photo { border-radius: 9px; }
-  .fv-photo-flowers { left: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; }
-  .fv-photo-birdhouse { left: auto; right: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; }
-  .fv-photo-painting { left: -1%; bottom: 13%; --photo-w: 31%; }
-  .fv-photo-camera { display: block; right: -3%; top: auto; bottom: 12%; --photo-w: 31%; --photo-ratio: 1.34 / 1; --reveal-origin: left top; }
+  .fv-photo-flowers { left: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; --arrival-x: 3px; --arrival-y: 0px; }
+  .fv-photo-birdhouse { left: auto; right: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; --arrival-x: -3px; --arrival-y: 0px; }
+  .fv-photo-painting { left: -1%; bottom: 13%; --photo-w: 31%; --arrival-x: 4px; --arrival-y: -4px; }
+  .fv-photo-camera { display: block; right: -3%; top: auto; bottom: 12%; --photo-w: 31%; --photo-ratio: 1.34 / 1; --arrival-x: -4px; --arrival-y: -4px; }
   .fv-photo-airplane, .fv-photo-sprout, .fv-photo-bicycle, .fv-photo-bread { display: none; }
   .fv-new-copy { width: min(100% - 40px, 560px); padding-top: var(--header-h); }
   .fv-new-title { font-size: clamp(31px, 8.8vw, 45px); line-height: 1.55; }

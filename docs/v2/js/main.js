@@ -57,7 +57,7 @@
     if (reduced) {
       fvNew.classList.add("is-expanded");
     } else {
-      setTimeout(function () { fvNew.classList.add("is-expanded"); }, 260);
+      setTimeout(function () { fvNew.classList.add("is-expanded"); }, 460);
     }
   }
 
