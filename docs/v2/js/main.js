@@ -59,7 +59,35 @@
 
   if (fvNew && !reduced) {
     setTimeout(function () { fvNew.classList.add("is-expanded"); }, 630);
-    setTimeout(function () { fvNew.classList.add("is-settled"); }, 2320);
+    setTimeout(function () {
+      fvNew.classList.add("is-settled");
+      if (window.matchMedia("(min-width: 901px)").matches) startFvOrbit(fvNew);
+    }, 2320);
+  }
+
+  function startFvOrbit(fv) {
+    var photos = Array.prototype.slice.call(fv.querySelectorAll(".fv-photo"));
+    var started = null;
+    var period = 42000;
+    function frame(now) {
+      if (document.hidden) { requestAnimationFrame(frame); return; }
+      if (started === null) started = now;
+      var progress = ((now - started) % period) / period;
+      var rx = window.innerWidth * 0.43;
+      var ry = window.innerHeight * 0.31;
+      photos.forEach(function (photo) {
+        var angle = (parseFloat(photo.getAttribute("data-orbit-angle")) + progress * 360) * Math.PI / 180;
+        var depth = (Math.sin(angle) + 1) / 2;
+        var x = Math.cos(angle) * rx;
+        var y = Math.sin(angle) * ry;
+        var scale = 0.94 + depth * 0.10;
+        photo.style.transform = "translate(-50%, -50%) translate3d(" + x.toFixed(2) + "px, " + y.toFixed(2) + "px, 0) scale(" + scale.toFixed(3) + ")";
+        photo.style.opacity = (0.72 + depth * 0.28).toFixed(3);
+        photo.style.zIndex = String(1 + Math.round(depth * 8));
+      });
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   }
 
   /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */
