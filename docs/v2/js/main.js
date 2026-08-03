@@ -44,20 +44,9 @@
     if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") closeMenu();
   });
 
-  /* FV：水滴から琵琶湖、暮らしの風景へ。一連の導入として見せる。 */
+  /* FV：コピーのあと、琵琶湖を起点に写真がひろがる。 */
   var fvNew = document.querySelector(".fv-new");
-  var intro = document.getElementById("intro");
-  var introDelay = 160;
-  if (fvNew && intro && !reduced) {
-    document.body.classList.add("intro-ready");
-    setTimeout(function () { intro.classList.add("is-rippling"); }, 180);
-    setTimeout(function () { intro.classList.add("is-leaving"); }, 1120);
-    setTimeout(function () {
-      document.body.classList.remove("intro-ready");
-      fvNew.classList.add("is-expanded");
-    }, 1660);
-    introDelay = 1480;
-  } else if (fvNew) {
+  if (fvNew && reduced) {
     fvNew.classList.add("is-expanded");
   }
 
@@ -65,8 +54,13 @@
   var heroFx = document.querySelectorAll(".fv .fx, .page-hero .fx");
   heroFx.forEach(function (el, i) {
     if (reduced) { el.classList.add("on"); return; }
-    setTimeout(function () { el.classList.add("on"); }, introDelay + i * 115);
+    setTimeout(function () { el.classList.add("on"); }, 160 + i * 115);
   });
+
+  if (fvNew && !reduced) {
+    setTimeout(function () { fvNew.classList.add("is-expanded"); }, 630);
+    setTimeout(function () { fvNew.classList.add("is-settled"); }, 2320);
+  }
 
   /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */
   var mani = document.querySelector(".manifesto");
