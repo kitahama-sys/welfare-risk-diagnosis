@@ -1369,91 +1369,111 @@ em, i { font-style: normal; }
 }
 
 /* ===========================================================================
-   HOME FV v10
-   写真とコピーを同じ編集グリッドへ置く。一枚の構図として読ませる。
+   HOME FV v11
+   琵琶湖を「地域の装飾」ではなく、暮らしの写真がほどける起点として扱う。
+   8枚の写真はカード群ではなく、一続きの編集面として現れる。
    ========================================================================== */
 .fv-new {
   min-height: 100dvh;
   isolation: isolate;
   overflow: clip;
-  background: #F3F8F6;
+  background: #F8F9F6;
 }
 .fv-new::before {
-  z-index: 0;
-  left: 50%;
-  right: auto;
-  bottom: -48vh;
-  width: min(82vw, 1120px);
-  transform: translateX(-50%);
-  border-color: rgba(46,130,112,.075);
-  box-shadow: 0 0 0 76px rgba(46,130,112,.012), 0 0 0 146px rgba(46,130,112,.005);
+  display: none;
 }
 .fv-new-lake {
-  z-index: 1;
-  left: 51%;
-  right: auto;
-  top: 55%;
-  width: min(24vw, 330px);
-  height: min(54vh, 500px);
-  opacity: .26;
-  transform: translate(-50%, -50%);
+  display: none;
 }
-.fv-new-lake::after { background: rgba(243,248,246,.57); }
-.fv-new-lake img { object-position: 64% center; filter: saturate(.52) contrast(.94); animation: none; }
+.fv-new-lake::after { background: linear-gradient(140deg, rgba(248,250,247,.03), rgba(45,126,110,.12)); }
+.fv-new-lake img { object-position: 51% center; filter: saturate(.63) contrast(.91) brightness(1.07); animation: fv-source-water 22s cubic-bezier(.45,0,.2,1) infinite alternate; }
 .fv-editorial-grid {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   inset: var(--header-h) clamp(42px, 6vw, 96px) 7.5vh;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(8, minmax(0, 1fr));
-  gap: 4px;
+}
+.fv-living-archive {
+  position: absolute;
+  z-index: 1;
+  inset: var(--header-h) 0 0;
+  display: block;
+  transform-origin: left center;
 }
 .fv-tile {
-  position: relative;
+  position: absolute;
   z-index: 1;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
   margin: 0;
-  background: #DFEAE5;
+  display: none;
+  background: transparent;
   opacity: 1;
   transform: translate3d(0, 0, 0);
+  mix-blend-mode: multiply;
   will-change: transform, opacity;
 }
-.fv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) contrast(.98); }
-.fv-tile--flowers { grid-column: 8 / span 3; grid-row: 2 / span 2; }
-.fv-tile--birdhouse { grid-column: 11 / span 2; grid-row: 2 / span 2; }
-.fv-tile--painting { grid-column: 1 / span 2; grid-row: 4 / span 3; }
-.fv-tile--sprout { grid-column: 3 / span 1; grid-row: 4 / span 1; }
-.fv-tile--bread { grid-column: 3 / span 1; grid-row: 5 / span 2; }
-.fv-tile--airplane { grid-column: 8 / span 3; grid-row: 6 / span 2; }
-.fv-tile--camera { grid-column: 11 / span 1; grid-row: 6 / span 2; }
-.fv-tile--bicycle { grid-column: 12 / span 1; grid-row: 6 / span 2; }
+.fv-tile::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(25,60,53,.08), rgba(248,249,246,.02) 70%, rgba(248,249,246,.22)); pointer-events: none; }
+.fv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 1; filter: saturate(.62) contrast(.95) brightness(1.02); transform: scale(1.035); transition: transform 4.8s cubic-bezier(.16,1,.3,1); }
+/* 琵琶湖を源に、写真の内側を水面へ溶かしながら暮らしがひらく。 */
+.fv-tile--sprout, .fv-tile--flowers, .fv-tile--birdhouse, .fv-tile--bread,
+.fv-tile--painting, .fv-tile--airplane, .fv-tile--camera, .fv-tile--bicycle { -webkit-mask-image: none; mask-image: none; }
+/* 写真は「周囲のカード」ではなく、コピーの間を流れる二つの編集面。 */
+.fv-tile--airplane { display: block; left: 0; top: 0; width: 60%; height: 100%; --entry-x: -18px; --entry-y: 0; --entry-delay: 130ms; }
 .fv-new-copy { position: absolute; z-index: 3; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
-.fv-new-title { position: relative; width: 100%; height: 100%; margin: 0; font-size: clamp(46px, 4.65vw, 66px); font-weight: 700; line-height: 1; letter-spacing: .1em; text-align: left; text-shadow: none; }
+.fv-new-title { position: relative; width: 100%; height: 100%; margin: 0; font-size: clamp(43px, 4.05vw, 60px); font-weight: 700; line-height: 1.4; letter-spacing: .075em; text-align: left; text-shadow: none; }
 .fv-copy-line { position: absolute; display: block; white-space: nowrap; }
-.fv-copy-line--one { top: 17.5%; left: 0; }
-.fv-copy-line--two { top: 43.75%; left: 31%; }
-.fv-copy-line--three { top: 76%; left: 8.5%; color: var(--teal); }
-.js .fv-tile {
-  opacity: 0;
-  transform: translate3d(0, 3.2vh, 0);
-  transition: opacity .65s cubic-bezier(.22,1,.36,1) .18s, transform 1.15s cubic-bezier(.16,1,.3,1) .18s;
+.fv-copy-line--one { top: 28%; left: 64%; }
+.fv-copy-line--two { top: 43%; left: 64%; }
+.fv-copy-line--three { top: 58%; left: 64%; color: var(--teal); }
+/* 湖の中心から、外側の暮らしへ。一度だけ開き、以降は止まる。 */
+.js .fv-tile { opacity: 0; transform: translate3d(var(--entry-x, -16px), var(--entry-y, 10px), 0) scale(.985); }
+.js .fv-new.is-expanded .fv-tile { animation: fv-photo-unfold 1.05s cubic-bezier(.16,1,.3,1) var(--entry-delay, 0ms) both; }
+.js .fv-new.is-expanded .fv-tile img { transform: scale(1); }
+.fv-tile--sprout { --entry-x: -5px; --entry-y: 8px; --entry-delay: 0ms; }
+.fv-tile--flowers { --entry-x: -15px; --entry-y: 11px; --entry-delay: 100ms; }
+.fv-tile--birdhouse { --entry-x: -20px; --entry-y: 10px; --entry-delay: 170ms; }
+.fv-tile--bread { --entry-x: -16px; --entry-y: 4px; --entry-delay: 250ms; }
+.fv-tile--painting { --entry-x: -20px; --entry-y: 3px; --entry-delay: 320ms; }
+.fv-tile--airplane { --entry-x: -10px; --entry-y: -12px; --entry-delay: 390ms; }
+.fv-tile--camera { --entry-x: 10px; --entry-y: -13px; --entry-delay: 460ms; }
+.fv-tile--bicycle { --entry-x: 17px; --entry-y: -15px; --entry-delay: 530ms; }
+@keyframes fv-photo-unfold {
+  from { opacity: 0; transform: translate3d(var(--entry-x, -16px), var(--entry-y, 10px), 0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
-.js .fv-new.is-expanded .fv-tile { opacity: 1; transform: translate3d(0,0,0); }
+/* 写真を「現れる要素」にせず、湖岸の景色そのものがひらくように見せる。 */
+.js .fv-tile--airplane { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
+.js .fv-new.is-expanded .fv-tile--airplane { animation: fv-editorial-image-reveal 1.35s cubic-bezier(.76,0,.24,1) 0ms both; }
+@keyframes fv-editorial-image-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes fv-source-water { from { transform: scale(1.05) translate3d(-1.1%, .7%, 0); } to { transform: scale(1.12) translate3d(1.1%, -.7%, 0); } }
 
 @media (max-width: 900px) {
   .fv-new { min-height: 100dvh; padding-top: 0; }
-  .fv-new-lake { top: auto; bottom: -10%; width: min(57vw, 350px); height: 54vh; opacity: .42; }
-  .fv-editorial-grid { inset: var(--header-h) 20px 8vh; grid-template-columns: repeat(6, minmax(0,1fr)); grid-template-rows: repeat(10, minmax(0,1fr)); gap: 3px; }
+  .fv-editorial-grid { inset: var(--header-h) 20px 8vh; grid-template-columns: repeat(6, minmax(0,1fr)); grid-template-rows: repeat(10, minmax(0,1fr)); }
+  .fv-living-archive { inset: var(--header-h) 0 0; }
+  .fv-tile--airplane { display: block; left: 0; top: 0; width: 100%; height: 46%; }
   .fv-new-copy { inset: 0; left: auto; top: auto; width: 100%; height: 100%; transform: none; }
-  .fv-new-title { position: absolute; top: 48px; left: 0; width: 100%; height: auto; font-size: clamp(30px, 8vw, 40px); line-height: 1.58; letter-spacing: .055em; text-align: center; }
+  .fv-new-title { position: absolute; top: 57%; left: 0; width: 100%; height: auto; padding-inline: 24px; font-size: clamp(30px, 8vw, 40px); line-height: 1.58; letter-spacing: .055em; text-align: left; }
   .fv-copy-line { position: static; }
-  .fv-tile--flowers, .fv-tile--birdhouse, .fv-tile--sprout, .fv-tile--bread, .fv-tile--camera, .fv-tile--bicycle { display: none; }
-  .fv-tile--painting { grid-column: 1 / span 3; grid-row: 8 / span 2; }
-  .fv-tile--airplane { grid-column: 4 / span 3; grid-row: 8 / span 2; }
+}
+@media (max-width: 560px) {
+  .fv-new-title {
+    top: 55%;
+    padding-inline: 24px;
+    font-size: clamp(25px, 7.1vw, 29px);
+    line-height: 1.68;
+    letter-spacing: .03em;
+  }
+  .fv-copy-line { white-space: nowrap; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .fv-tile, .fv-editorial-grid, .fv-new-lake { animation: none !important; }
+  .fv-tile, .fv-living-archive, .fv-editorial-grid, .fv-new-lake { animation: none !important; }
+  .js .fv-tile { opacity: 1; transform: none; clip-path: none; }
 }
