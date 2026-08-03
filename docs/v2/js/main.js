@@ -44,8 +44,71 @@
     if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") closeMenu();
   });
 
-  /* FV：コピーのあと、琵琶湖を起点に写真がひろがる。 */
+  /* FV：コピーのあと、琵琶湖を起点に写真がひろがり、外周を巡る。 */
   var fvNew = document.querySelector(".fv-new");
+  var fvPhotoField = fvNew && fvNew.querySelector(".fv-photo-field");
+  var fvPhotos = fvPhotoField ? Array.prototype.slice.call(fvPhotoField.querySelectorAll(".fv-photo")) : [];
+  var orbitFrame = null;
+  var orbitStartedAt = 0;
+  var orbitPausedAt = 0;
+  var orbitPhases = [-140, -98, -56, -18, 30, 72, 112, 150].map(function (degree) { return degree * Math.PI / 180; });
+  var orbitDuration = 21000;
+
+  function orbitMetrics() {
+    var rect = fvPhotoField.getBoundingClientRect();
+    return {
+      x: rect.width * 0.42,
+      y: Math.min(rect.height * 0.37, rect.height / 2 - 96)
+    };
+  }
+
+  function setOrbitOrigins() {
+    if (!fvPhotoField || window.innerWidth <= 900) return;
+    var metrics = orbitMetrics();
+    fvPhotos.forEach(function (photo, index) {
+      photo.style.setProperty("--orbit-x", (Math.cos(orbitPhases[index]) * metrics.x).toFixed(2) + "px");
+      photo.style.setProperty("--orbit-y", (Math.sin(orbitPhases[index]) * metrics.y).toFixed(2) + "px");
+    });
+  }
+
+  function drawOrbit(now) {
+    if (!fvPhotoField || document.hidden || window.innerWidth <= 900) return;
+    var metrics = orbitMetrics();
+    var turn = ((now - orbitStartedAt) % orbitDuration) / orbitDuration * Math.PI * 2;
+    fvPhotos.forEach(function (photo, index) {
+      var angle = orbitPhases[index] + turn;
+      var x = Math.cos(angle) * metrics.x;
+      var y = Math.sin(angle) * metrics.y;
+      var depth = (Math.sin(angle) + 1) / 2;
+      var scale = 0.87 + depth * 0.17;
+      photo.style.transform = "translate3d(calc(-50% + " + x.toFixed(2) + "px), calc(-50% + " + y.toFixed(2) + "px), 0) scale(" + scale.toFixed(3) + ")";
+      photo.style.opacity = (0.52 + depth * 0.48).toFixed(3);
+      photo.style.zIndex = String(10 + Math.round(depth * 10));
+    });
+    orbitFrame = requestAnimationFrame(drawOrbit);
+  }
+
+  function startOrbit() {
+    if (!fvNew || !fvPhotoField || reduced || window.innerWidth <= 900) return;
+    setOrbitOrigins();
+    fvNew.classList.add("is-orbiting");
+    orbitStartedAt = performance.now();
+    if (orbitFrame) cancelAnimationFrame(orbitFrame);
+    orbitFrame = requestAnimationFrame(drawOrbit);
+  }
+
+  function stopOrbit() {
+    if (orbitFrame) cancelAnimationFrame(orbitFrame);
+    orbitFrame = null;
+    if (fvNew) fvNew.classList.remove("is-orbiting");
+    fvPhotos.forEach(function (photo) {
+      photo.style.removeProperty("transform");
+      photo.style.removeProperty("opacity");
+      photo.style.removeProperty("z-index");
+    });
+  }
+
+  if (fvNew) setOrbitOrigins();
   if (fvNew && reduced) {
     fvNew.classList.add("is-expanded");
   }
@@ -60,6 +123,22 @@
   if (fvNew && !reduced) {
     setTimeout(function () { fvNew.classList.add("is-expanded"); }, 630);
     setTimeout(function () { fvNew.classList.add("is-settled"); }, 2320);
+    setTimeout(startOrbit, 2400);
+    window.addEventListener("resize", function () {
+      if (window.innerWidth <= 900) { stopOrbit(); return; }
+      setOrbitOrigins();
+      if (fvNew.classList.contains("is-settled")) startOrbit();
+    }, { passive: true });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        orbitPausedAt = performance.now();
+        if (orbitFrame) cancelAnimationFrame(orbitFrame);
+        orbitFrame = null;
+      } else if (fvNew.classList.contains("is-orbiting")) {
+        orbitStartedAt += performance.now() - orbitPausedAt;
+        orbitFrame = requestAnimationFrame(drawOrbit);
+      }
+    });
   }
 
   /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */
