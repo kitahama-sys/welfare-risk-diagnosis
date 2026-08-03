@@ -44,7 +44,7 @@
     if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") closeMenu();
   });
 
-  /* FV：コピーのあと、琵琶湖を起点に写真がひろがる。 */
+  /* FV：コピーの余白から、暮らしの写真がひらく。 */
   var fvNew = document.querySelector(".fv-new");
   if (fvNew && reduced) {
     fvNew.classList.add("is-expanded");
@@ -59,7 +59,6 @@
 
   if (fvNew && !reduced) {
     setTimeout(function () { fvNew.classList.add("is-expanded"); }, 630);
-    setTimeout(function () { fvNew.classList.add("is-settled"); }, 2320);
   }
 
   /* manifesto: セクション交差でまとめて発火（行が切り抜きのため） */

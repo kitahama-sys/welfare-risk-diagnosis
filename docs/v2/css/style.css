@@ -1250,11 +1250,11 @@ em, i { font-style: normal; }
 }
 
 .manifesto {
-  min-height: 86dvh;
+  min-height: 78dvh;
   display: grid;
   align-items: center;
   margin: 0;
-  padding: clamp(110px, 13vw, 190px) 0;
+  padding: clamp(86px, 9vw, 130px) 0;
   background: #F7F9F7;
 }
 .manifesto-inner { width: min(100% - 2 * var(--pad), 1160px); margin-inline: auto; }
@@ -1317,70 +1317,6 @@ em, i { font-style: normal; }
   to { transform: scale(1.08) translate3d(3%, -2%, 0); opacity: 1; }
 }
 
-/* FV v6：琵琶湖を起点に、暮らしの風景が静かにひろがる。 */
-.fv-new { place-items: center; background: #EDF5F2; }
-.fv-new::before {
-  z-index: 0; left: 50%; right: auto; bottom: -42vh; width: min(78vw, 1080px);
-  transform: translateX(-50%); border-color: rgba(46,130,112,.10);
-  box-shadow: 0 0 0 58px rgba(46,130,112,.025), 0 0 0 116px rgba(46,130,112,.014);
-}
-.fv-new-lake {
-  z-index: 0; left: 50%; right: auto; top: 51%; width: min(28vw, 390px); height: min(58vh, 590px);
-  opacity: .50; transform: translate(-50%, -50%);
-}
-.fv-new-lake::after { background: linear-gradient(145deg, rgba(237,245,242,.24), rgba(237,245,242,.44)); }
-.fv-new-lake img { object-position: 70% center; filter: saturate(.85) contrast(.98); transform: scale(1.15); }
-.fv-photo-field {
-  position: absolute; z-index: 1; inset: 0; width: min(100% - 2 * var(--pad), 1240px); height: 100%;
-  margin-inline: auto; pointer-events: none;
-}
-.fv-photo {
-  position: absolute; inset: auto; display: block; overflow: hidden; margin: 0; width: var(--photo-w); aspect-ratio: var(--photo-ratio, 1.18 / 1);
-  border-radius: 12px; opacity: 1;
-  transform: none;
-  will-change: transform, opacity;
-}
-.fv-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); will-change: transform; }
-.js .fv-photo {
-  opacity: 0;
-  transform: translate3d(var(--origin-x), var(--origin-y), 0) scale(.78);
-  transition: opacity .75s cubic-bezier(.22,1,.36,1) var(--burst-delay, 0ms), transform 1.55s cubic-bezier(.16,1,.3,1) var(--burst-delay, 0ms);
-}
-.js .fv-new.is-expanded .fv-photo { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-.fv-photo-flowers { left: 1%; top: 15%; --photo-w: 20%; --origin-x: 47vw; --origin-y: 34vh; --burst-delay: 40ms; --idle-x: -3px; --idle-y: 2px; --idle-duration: 18s; --idle-delay: .1s; }
-.fv-photo-birdhouse { left: 56%; top: 15%; --photo-w: 13%; --origin-x: -13vw; --origin-y: 34vh; --burst-delay: 80ms; --idle-x: 2px; --idle-y: -2px; --idle-duration: 21s; --idle-delay: .8s; }
-.fv-photo-airplane { right: 0; top: 27%; --photo-w: 22%; --photo-ratio: 1.34 / 1; --origin-x: -40vw; --origin-y: 24vh; --burst-delay: 130ms; --idle-x: -4px; --idle-y: 2px; --idle-duration: 20s; --idle-delay: 1.2s; }
-.fv-photo-painting { left: 3%; bottom: 12%; --photo-w: 18%; --origin-x: 45vw; --origin-y: -25vh; --burst-delay: 110ms; --idle-x: 3px; --idle-y: -2px; --idle-duration: 19s; --idle-delay: .5s; }
-.fv-photo-camera { right: 8%; bottom: 7%; --photo-w: 15%; --origin-x: -43vw; --origin-y: -30vh; --burst-delay: 160ms; --idle-x: -3px; --idle-y: -2px; --idle-duration: 22s; --idle-delay: 1.5s; }
-.fv-photo-sprout { left: 34%; top: 16%; --photo-w: 9%; --origin-x: 16vw; --origin-y: 34vh; --burst-delay: 0ms; --idle-x: 1px; --idle-y: -3px; --idle-duration: 17s; --idle-delay: 0s; }
-.fv-photo-bicycle { right: 33%; bottom: 5%; --photo-w: 11%; --origin-x: -8vw; --origin-y: -38vh; --burst-delay: 95ms; --idle-x: -2px; --idle-y: -2px; --idle-duration: 23s; --idle-delay: .7s; }
-.fv-photo-bread { left: 28%; bottom: 5%; --photo-w: 11%; --origin-x: 20vw; --origin-y: -38vh; --burst-delay: 65ms; --idle-x: 2px; --idle-y: -2px; --idle-duration: 16s; --idle-delay: 1s; }
-.fv-new-copy {
-  position: relative; z-index: 2; display: grid; place-items: center; width: min(100% - 2 * var(--pad), 880px); padding-top: 0;
-}
-.fv-new-title { max-width: none; margin-top: 0; font-size: clamp(40px, 4.4vw, 70px); line-height: 1.5; text-align: center; text-shadow: 0 1px 18px rgba(237,245,242,.72); }
-.fv-new-title span:nth-child(3) { color: var(--teal); }
-@media (prefers-reduced-motion: no-preference) { .fv-new-lake img { animation: fv-lake-pan 18s cubic-bezier(.45,0,.2,1) infinite alternate; } }
-@media (prefers-reduced-motion: no-preference) {
-  .fv-new.is-settled .fv-photo img { animation: fv-photo-idle var(--idle-duration, 20s) cubic-bezier(.45,0,.2,1) var(--idle-delay, 0s) infinite alternate; }
-}
-@media (prefers-reduced-motion: reduce) { .fv-photo { opacity: 1; transform: none; transition: none; } }
-@keyframes fv-lake-pan { from { transform: scale(1.13) translate3d(1.5%, 1%, 0); } to { transform: scale(1.19) translate3d(-1.5%, -1%, 0); } }
-@keyframes fv-photo-idle { from { transform: scale(1.02) translate3d(0, 0, 0); } to { transform: scale(1.05) translate3d(var(--idle-x), var(--idle-y), 0); } }
-@media (max-width: 900px) {
-  .fv-new { min-height: 100dvh; padding-top: 0; }
-  .fv-new-lake { top: 53%; width: min(58vw, 340px); height: min(60vh, 520px); opacity: .38; }
-  .fv-photo-field { width: 100%; }
-  .fv-photo { border-radius: 9px; }
-  .fv-photo-flowers { left: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; --origin-x: 43vw; --origin-y: 32vh; }
-  .fv-photo-birdhouse { left: auto; right: 0; top: calc(var(--header-h) + 2px); --photo-w: 15%; --origin-x: -43vw; --origin-y: 32vh; }
-  .fv-photo-painting { left: -1%; bottom: 13%; --photo-w: 31%; --origin-x: 40vw; --origin-y: -25vh; }
-  .fv-photo-camera { display: block; right: -3%; top: auto; bottom: 12%; --photo-w: 31%; --photo-ratio: 1.34 / 1; --origin-x: -38vw; --origin-y: -25vh; }
-  .fv-photo-airplane, .fv-photo-sprout, .fv-photo-bicycle, .fv-photo-bread { display: none; }
-  .fv-new-copy { width: min(100% - 40px, 560px); padding-top: var(--header-h); }
-  .fv-new-title { font-size: clamp(31px, 8.8vw, 45px); line-height: 1.55; }
-}
-
 /* WordPressの更新資産をホームの価値として見せる。 */
 .updates { background: linear-gradient(180deg, rgba(104,196,175,0.08), rgba(252,251,248,0.24) 68%, transparent); }
 .updates-head { display: grid; grid-template-columns: 1fr minmax(260px, 0.68fr); gap: clamp(32px, 7vw, 110px); align-items: end; margin-bottom: clamp(38px, 5vw, 66px); }
@@ -1430,4 +1366,94 @@ em, i { font-style: normal; }
   .updates-feature img { aspect-ratio: 1.55; }
   .updates-list li a { grid-template-columns: 90px 1fr auto; gap: 12px; }
   .updates-list li span { font-size: 13px; }
+}
+
+/* ===========================================================================
+   HOME FV v10
+   写真とコピーを同じ編集グリッドへ置く。一枚の構図として読ませる。
+   ========================================================================== */
+.fv-new {
+  min-height: 100dvh;
+  isolation: isolate;
+  overflow: clip;
+  background: #F3F8F6;
+}
+.fv-new::before {
+  z-index: 0;
+  left: 50%;
+  right: auto;
+  bottom: -48vh;
+  width: min(82vw, 1120px);
+  transform: translateX(-50%);
+  border-color: rgba(46,130,112,.075);
+  box-shadow: 0 0 0 76px rgba(46,130,112,.012), 0 0 0 146px rgba(46,130,112,.005);
+}
+.fv-new-lake {
+  z-index: 1;
+  left: 51%;
+  right: auto;
+  top: 55%;
+  width: min(24vw, 330px);
+  height: min(54vh, 500px);
+  opacity: .26;
+  transform: translate(-50%, -50%);
+}
+.fv-new-lake::after { background: rgba(243,248,246,.57); }
+.fv-new-lake img { object-position: 64% center; filter: saturate(.52) contrast(.94); animation: none; }
+.fv-editorial-grid {
+  position: absolute;
+  z-index: 2;
+  inset: var(--header-h) clamp(42px, 6vw, 96px) 7.5vh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  gap: 4px;
+}
+.fv-tile {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0;
+  background: #DFEAE5;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+.fv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) contrast(.98); }
+.fv-tile--flowers { grid-column: 8 / span 3; grid-row: 2 / span 2; }
+.fv-tile--birdhouse { grid-column: 11 / span 2; grid-row: 2 / span 2; }
+.fv-tile--painting { grid-column: 1 / span 2; grid-row: 4 / span 3; }
+.fv-tile--sprout { grid-column: 3 / span 1; grid-row: 4 / span 1; }
+.fv-tile--bread { grid-column: 3 / span 1; grid-row: 5 / span 2; }
+.fv-tile--airplane { grid-column: 8 / span 3; grid-row: 6 / span 2; }
+.fv-tile--camera { grid-column: 11 / span 1; grid-row: 6 / span 2; }
+.fv-tile--bicycle { grid-column: 12 / span 1; grid-row: 6 / span 2; }
+.fv-new-copy { position: absolute; z-index: 3; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+.fv-new-title { position: relative; width: 100%; height: 100%; margin: 0; font-size: clamp(46px, 4.65vw, 66px); font-weight: 700; line-height: 1; letter-spacing: .1em; text-align: left; text-shadow: none; }
+.fv-copy-line { position: absolute; display: block; white-space: nowrap; }
+.fv-copy-line--one { top: 17.5%; left: 0; }
+.fv-copy-line--two { top: 43.75%; left: 31%; }
+.fv-copy-line--three { top: 76%; left: 8.5%; color: var(--teal); }
+.js .fv-tile {
+  opacity: 0;
+  transform: translate3d(0, 3.2vh, 0);
+  transition: opacity .65s cubic-bezier(.22,1,.36,1) .18s, transform 1.15s cubic-bezier(.16,1,.3,1) .18s;
+}
+.js .fv-new.is-expanded .fv-tile { opacity: 1; transform: translate3d(0,0,0); }
+
+@media (max-width: 900px) {
+  .fv-new { min-height: 100dvh; padding-top: 0; }
+  .fv-new-lake { top: auto; bottom: -10%; width: min(57vw, 350px); height: 54vh; opacity: .42; }
+  .fv-editorial-grid { inset: var(--header-h) 20px 8vh; grid-template-columns: repeat(6, minmax(0,1fr)); grid-template-rows: repeat(10, minmax(0,1fr)); gap: 3px; }
+  .fv-new-copy { inset: 0; left: auto; top: auto; width: 100%; height: 100%; transform: none; }
+  .fv-new-title { position: absolute; top: 48px; left: 0; width: 100%; height: auto; font-size: clamp(30px, 8vw, 40px); line-height: 1.58; letter-spacing: .055em; text-align: center; }
+  .fv-copy-line { position: static; }
+  .fv-tile--flowers, .fv-tile--birdhouse, .fv-tile--sprout, .fv-tile--bread, .fv-tile--camera, .fv-tile--bicycle { display: none; }
+  .fv-tile--painting { grid-column: 1 / span 3; grid-row: 8 / span 2; }
+  .fv-tile--airplane { grid-column: 4 / span 3; grid-row: 8 / span 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fv-tile, .fv-editorial-grid, .fv-new-lake { animation: none !important; }
 }
