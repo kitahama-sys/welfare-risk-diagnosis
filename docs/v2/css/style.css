@@ -1655,7 +1655,7 @@ em, i { font-style: normal; }
   padding-block: clamp(46px, 5.6vw, 82px);
 }
 .sodatsu-item:nth-child(2) {
-  grid-template-columns: minmax(230px, .78fr) minmax(150px, .42fr) minmax(300px, .98fr);
+  grid-template-columns: minmax(230px, .72fr) minmax(210px, .58fr) minmax(320px, .92fr);
   grid-template-areas: "visual key body";
 }
 .sodatsu-item:nth-child(3) {
@@ -1665,7 +1665,7 @@ em, i { font-style: normal; }
 .sodatsu-key { grid-area: key; }
 .sodatsu-body { grid-area: body; }
 .sodatsu-key { gap: 14px; }
-.sodatsu-key h3 { font-family: var(--sans); font-size: clamp(42px, 4.4vw, 64px); font-weight: 500; line-height: 1; letter-spacing: .02em; }
+.sodatsu-key h3 { font-family: var(--sans); font-size: clamp(42px, 4.4vw, 64px); font-weight: 500; line-height: 1; letter-spacing: .02em; white-space: nowrap; }
 .sodatsu .key-num { font-family: var(--sans); font-size: 12px; color: var(--teal); letter-spacing: .1em; }
 .sodatsu .key-en { display: none; }
 .sodatsu-body h4 { font-family: var(--sans); font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; line-height: 1.62; letter-spacing: .025em; margin-bottom: 18px; }
@@ -1700,6 +1700,7 @@ em, i { font-style: normal; }
 .sodatsu-visual--life img { object-position: 64% center; }
 .sodatsu-visual--community { aspect-ratio: 1.56 / 1; }
 .sodatsu-visual--community img { object-position: 45% center; }
+.sodatsu-copy-break { display: block; }
 .sodatsu .sec-cta { margin-top: clamp(52px, 7vw, 92px); }
 
 /* コピーはFVで一度、強く伝える。ここでは繰り返さず、次の内容へ静かにつなぐ。 */
@@ -1800,6 +1801,7 @@ em, i { font-style: normal; }
     padding-block: 42px;
   }
   .sodatsu-key h3 { font-size: clamp(38px, 10vw, 52px); }
+  .sodatsu-copy-break { display: none; }
   .sodatsu-visual { width: min(100%, 480px); margin-top: 12px; }
   .sodatsu-visual--person { width: min(72vw, 320px); aspect-ratio: .9 / 1; }
   .sodatsu-visual--life { aspect-ratio: 1.42 / 1; }
