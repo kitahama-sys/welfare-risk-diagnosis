@@ -1527,7 +1527,7 @@ em, i { font-style: normal; }
 .fv-aun-marquee span { padding-right: .32em; }
 .fv-copy-flow {
   position: relative; z-index: 1; width: min(100%, 1160px); margin: 0 auto; display: grid;
-  gap: clamp(22px, 3.3vh, 38px); transform: translateY(clamp(-62px, -5.5vh, -42px));
+  gap: clamp(12px, 1.9vh, 20px); transform: translateY(clamp(-56px, -5vh, -38px));
 }
 .fv-flow-row { display: flex; align-items: center; gap: clamp(18px, 2vw, 30px); min-width: 0; }
 .fv-flow-row--one { justify-content: flex-end; }
@@ -1556,10 +1556,8 @@ em, i { font-style: normal; }
 .fv-media--daily .fv-media-slide:nth-child(2) img { animation-delay: -2.3s; }
 .fv-media--daily .fv-media-slide:nth-child(3) img { animation-delay: -4.6s; }
 .fv-media--daily .fv-media-slide:nth-child(4) img { animation-delay: -6.9s; }
-.fv-media--growth > img {
+.fv-media--growth > img, .fv-media--growth > video {
   object-position: 51% 53%; filter: saturate(.52) contrast(.93) brightness(1.05);
-  animation: fv-growth-breathe 9s cubic-bezier(.45,0,.2,1) infinite alternate;
-  will-change: transform;
 }
 
 /* 下部の余白は、情報をひとつだけ置く。カードにはせず、次の行動の入口にする。 */
@@ -1603,7 +1601,6 @@ em, i { font-style: normal; }
 }
 @keyframes fv-people-fade { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 27%, 100% { opacity: 0; } }
 @keyframes fv-daily-drift { from { transform: scale(1.045) translate3d(-.55%, .25%, 0); } to { transform: scale(1.10) translate3d(.55%, -.25%, 0); } }
-@keyframes fv-growth-breathe { from { transform: scale(1.045) translate3d(-.7%, .25%, 0); } to { transform: scale(1.105) translate3d(.7%, -.35%, 0); } }
 @keyframes fv-lake-surface { from { transform: scale(1.05) translate3d(-1.1%, .35%, 0); } to { transform: scale(1.15) translate3d(1.1%, -.35%, 0); } }
 @media (prefers-reduced-motion: no-preference) { .fv-aun-marquee { animation: fv-aun-flow 34s linear infinite; } }
 @keyframes fv-aun-flow { from { transform: translateX(0); } to { transform: translateX(-34%); } }
@@ -1798,7 +1795,7 @@ em, i { font-style: normal; }
 @media (max-width: 900px) {
   .fv-new { min-height: auto; padding: calc(var(--header-h) + 44px) 20px 38px; }
   .fv-aun-marquee { top: 66%; font-size: 25vw; color: rgba(41,52,49,.014); }
-  .fv-copy-flow { gap: 28px; transform: translateY(-18px); }
+  .fv-copy-flow { gap: 20px; transform: translateY(-14px); }
   .fv-flow-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .fv-flow-row--one, .fv-flow-row--two, .fv-flow-row--three { justify-content: stretch; padding-right: 0; }
   .fv-flow-copy { max-width: 100%; font-size: clamp(31px, 7.7vw, 43px); font-weight: 500; letter-spacing: .01em; }
