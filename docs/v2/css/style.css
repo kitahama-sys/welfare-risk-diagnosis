@@ -2011,3 +2011,73 @@ em, i { font-style: normal; }
   .page-contact .block-tint .container, .page-visit .block-tint .container, .page-community .block-tint .container { grid-template-columns: 1fr; gap: 36px; }
   .page-contact .block-tint .block-head, .page-visit .block-tint .block-head, .page-community .block-tint .block-head { position: static; }
 }
+
+/* 下層の細部もTopの「強い文字と静かな写真」に揃える。 */
+.page-title .emp {
+  color: var(--tq-ink);
+  -webkit-text-emphasis: none;
+  text-emphasis: none;
+}
+.page-title .emp::before, .page-title .emp::after { display: none; }
+.mobile-only { display: none; }
+.page-hero::after { display: none; }
+.svc-name small { display: none; }
+
+/* 役割が明確なページだけに、内容に根ざした写真を置く。 */
+.page-company .page-hero,
+.page-contact .page-hero {
+  min-height: 480px;
+  display: block;
+}
+.page-company .page-hero .page-title,
+.page-company .page-hero .page-lead,
+.page-contact .page-hero .page-title,
+.page-contact .page-hero .page-lead { max-width: min(58%, 760px); }
+.page-company .page-hero-media,
+.page-contact .page-hero-media { display: block; }
+.page-company .page-hero-media { width: min(31vw, 430px); aspect-ratio: 1.04 / 1; }
+.page-company .page-hero-media-lake img { object-position: 62% 55%; }
+.page-contact .page-hero-media { width: min(28vw, 382px); aspect-ratio: 1 / 1; }
+.page-contact .page-hero-media-consult img { object-position: 58% center; }
+
+/* grid化した写真なしヒーローでも、本文の基準線は全ページで揃える。 */
+.page-about .page-hero .container,
+.page-visit .page-hero .container,
+.page-community .page-hero .container { width: 100%; }
+
+/* 相談の入口は、装飾ではなく「困りごと」を読み取れる一覧にする。 */
+.page-contact .svc-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 46px;
+  max-width: 860px !important;
+}
+.page-contact .svc-meta span {
+  display: block;
+  padding: 17px 0 16px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.page-contact .svc-meta span::before { content: none; }
+.page-contact .svc-meta span:last-child,
+.page-contact .svc-meta span:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+
+@media (max-width: 900px) {
+  .page-company .page-hero .page-title, .page-company .page-hero .page-lead,
+  .page-contact .page-hero .page-title, .page-contact .page-hero .page-lead { max-width: 57%; }
+  .page-company .page-hero, .page-contact .page-hero { min-height: 430px; }
+}
+@media (max-width: 640px) {
+  .mobile-only { display: block; }
+  .page-company .page-hero, .page-contact .page-hero { min-height: 0; }
+  .page-company .page-hero .page-title, .page-company .page-hero .page-lead,
+  .page-contact .page-hero .page-title, .page-contact .page-hero .page-lead { max-width: none; }
+  .page-company .page-hero-media, .page-contact .page-hero-media {
+    position: relative; top: auto; right: auto; width: 100%; max-width: none;
+    height: 230px; margin-top: 28px; transform: none;
+  }
+  .page-contact .svc-meta { grid-template-columns: 1fr; gap: 0; }
+  .page-contact .svc-meta span:nth-last-child(2) { border-bottom: 0; }
+}
