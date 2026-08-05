@@ -1557,23 +1557,6 @@ em, i { font-style: normal; }
 .fv-media-slide--four img { --drift-x: -.65%; --drift-y: -.4%; animation-delay: 12s; }
 .fv-media--growth > img { object-position: 52% center; filter: saturate(.54) contrast(.92) brightness(1.05); animation: fv-growth-drift 12s ease-in-out infinite alternate; }
 
-/* 写真の余白に言葉を住まわせる。写真とコピーを別の部品にしないFV。 */
-.fv-editorial-flow { width: min(100%, 1200px); gap: clamp(20px, 2.6vh, 34px); }
-.fv-stage { position: relative; isolation: isolate; }
-.fv-stage--one { width: min(100%, 980px); aspect-ratio: 2.95 / 1; margin-left: auto; }
-.fv-stage--two { width: min(94%, 930px); aspect-ratio: 2.82 / 1; margin-right: auto; }
-.fv-stage--three { width: min(74%, 760px); aspect-ratio: 2.9 / 1; margin-right: clamp(0px, 4vw, 56px); margin-left: auto; }
-.fv-stage .fv-media { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; background: #e7efea; }
-.fv-stage .fv-media > img { width: 100%; height: 100%; max-width: none; display: block; object-fit: cover; filter: saturate(.58) contrast(.93) brightness(1.07); animation: fv-stage-drift 15s cubic-bezier(.4,0,.2,1) infinite alternate; }
-.fv-stage--one .fv-media > img { object-position: 70% center; }
-.fv-stage--two .fv-media > img { object-position: 26% center; animation-delay: -5s; }
-.fv-stage--three .fv-media > img { object-position: 54% center; animation-delay: -9s; }
-.fv-stage .fv-flow-copy { position: absolute; z-index: 2; margin: 0; }
-.fv-stage--one .fv-flow-copy { left: 5.8%; top: calc(50% - .54em); }
-.fv-stage--two .fv-flow-copy { right: 4.8%; top: calc(50% - .54em); }
-.fv-stage--three .fv-flow-copy { left: -12%; top: calc(50% - .54em); }
-@keyframes fv-stage-drift { from { transform: scale(1.025) translate3d(-.55%, .15%, 0); } to { transform: scale(1.075) translate3d(.55%, -.15%, 0); } }
-
 /* ローダーのあと、言葉→写真→次の言葉の順に、静かに視線をひらく。 */
 .js .fv-new .fv-flow-copy,
 .js .fv-new .fv-media {
@@ -1801,13 +1784,6 @@ em, i { font-style: normal; }
   .fv-media--people { width: min(53vw, 280px); height: min(31vw, 146px); }
   .fv-media--daily { width: min(72vw, 330px); height: min(42vw, 176px); }
   .fv-media--growth { width: min(57vw, 294px); height: min(33vw, 152px); }
-  .fv-editorial-flow { width: 100%; gap: 24px; }
-  .fv-stage--one, .fv-stage--two { width: 100%; aspect-ratio: 1.64 / 1; margin-inline: 0; }
-  .fv-stage--three { width: min(78%, 320px); aspect-ratio: 1.55 / 1; margin-right: 0; }
-  .fv-stage .fv-flow-copy { font-size: clamp(27px, 7.1vw, 31px); letter-spacing: .055em; }
-  .fv-stage--one .fv-flow-copy { left: 5%; top: 27%; }
-  .fv-stage--two .fv-flow-copy { right: 4%; top: 69%; }
-  .fv-stage--three .fv-flow-copy { left: -8%; top: 43%; }
   .manifesto-lake { right: -24%; top: 58%; width: 82vw; height: 68%; opacity: .17; }
   .quick-guide { padding-block: 92px; }
   .quick-guide-inner { grid-template-columns: 1fr; gap: 42px; padding-top: 34px; }
@@ -1864,6 +1840,6 @@ em, i { font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   .aun-loader { display: none !important; }
   .js .fv-new .fv-flow-copy, .js .fv-new .fv-media { opacity: 1; transform: none; clip-path: none; transition: none; }
-  .fv-aun-marquee, .fv-media-slide, .fv-media-slide img, .fv-media--growth > img, .fv-stage .fv-media > img, .manifesto-lake img { animation: none !important; }
+  .fv-aun-marquee, .fv-media-slide, .fv-media-slide img, .fv-media--growth > img, .manifesto-lake img { animation: none !important; }
   .fv-media-slide--one { opacity: 1; }
 }
