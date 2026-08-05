@@ -1531,10 +1531,10 @@ em, i { font-style: normal; }
 .fv-flow-row--two { justify-content: flex-start; }
 .fv-flow-row--three { justify-content: flex-end; padding-right: clamp(0px, 5vw, 72px); }
 .fv-flow-copy {
-  flex: 0 0 auto; min-width: 0; color: var(--teal); font-family: var(--sans); font-size: clamp(38px, 4.7vw, 68px);
-  font-weight: 500; line-height: 1.08; letter-spacing: .015em; white-space: nowrap;
+  flex: 0 0 auto; min-width: 0; color: var(--teal); font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif; font-size: clamp(38px, 4.7vw, 68px);
+  font-weight: 500; line-height: 1.08; letter-spacing: .045em; white-space: nowrap; font-synthesis: none;
 }
-.fv-flow-copy--accent { color: var(--tq-ink); font-weight: 700; }
+.fv-flow-copy--accent { color: var(--tq-ink); font-weight: 500; }
 .fv-media { position: relative; flex: 0 1 auto; overflow: hidden; background: #DDE8E2; border-radius: 1px; }
 .fv-media--people { width: min(25vw, 300px); height: clamp(124px, 12vw, 164px); }
 .fv-media--daily { width: min(28vw, 338px); height: clamp(138px, 13vw, 178px); }
