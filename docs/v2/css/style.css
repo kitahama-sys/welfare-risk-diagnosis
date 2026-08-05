@@ -1531,8 +1531,8 @@ em, i { font-style: normal; }
 .fv-flow-row--two { justify-content: flex-start; }
 .fv-flow-row--three { justify-content: flex-end; padding-right: clamp(0px, 5vw, 72px); }
 .fv-flow-copy {
-  flex: 0 0 auto; min-width: 0; color: var(--teal); font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; font-size: clamp(44px, 5.15vw, 76px);
-  font-weight: 500; line-height: 1.04; letter-spacing: .025em; white-space: nowrap; font-synthesis: none;
+  flex: 0 0 auto; min-width: 0; color: var(--teal); font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif; font-size: clamp(46px, 5.55vw, 82px);
+  font-weight: 600; line-height: 1.04; letter-spacing: .018em; white-space: nowrap; font-synthesis: none;
 }
 .fv-flow-copy--accent { color: var(--tq-ink); font-weight: 500; }
 .fv-media { position: relative; flex: 0 1 auto; overflow: hidden; background: #DDE8E2; border-radius: 1px; }
@@ -1835,6 +1835,6 @@ em, i { font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   .aun-loader { display: none !important; }
   .js .fv-new .fv-flow-copy, .js .fv-new .fv-media { opacity: 1; transform: none; clip-path: none; transition: none; }
-  .fv-aun-marquee, .fv-media-slide, .fv-media-slide img, .fv-media--growth > img, .manifesto-lake img { animation: none !important; }
-  .fv-media-slide--one { opacity: 1; }
+  .fv-aun-marquee, .fv-media-track, .fv-media-slide, .fv-media-slide img, .fv-media--growth > img, .manifesto-lake img { animation: none !important; }
+  .fv-media-track { transform: none !important; }
 }
