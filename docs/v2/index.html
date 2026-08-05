@@ -70,30 +70,43 @@
 
 <main id="main">
 
-<!-- ============ FV：コピーと写真を同じ構図で読ませる ============ -->
+<!-- ============ FV：言葉の余白を、暮らしの写真がつなぐ ============ -->
+<div class="aun-loader" aria-hidden="true">
+  <div class="aun-loader-mark"><img src="assets/logo.svg" alt=""><span>AUN</span></div>
+</div>
 <section class="fv fv-new" id="top">
-  <div class="fv-new-lake" aria-hidden="true"><img src="assets/fv-lake-day.png" alt=""></div>
-  <div class="fv-editorial-grid">
-    <figure class="fv-tile fv-tile--flowers" aria-hidden="true"><img src="assets/growth/growth-flowers.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--birdhouse" aria-hidden="true"><img src="assets/growth/growth-birdhouse.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--painting" aria-hidden="true"><img src="assets/growth/growth-painting.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--sprout" aria-hidden="true"><img src="assets/growth/growth-sprout.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--bread" aria-hidden="true"><img src="assets/growth/growth-bread.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--airplane" aria-hidden="true"><img src="assets/growth/growth-airplane.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--camera" aria-hidden="true"><img src="assets/growth/growth-camera.png" alt=""></figure>
-    <figure class="fv-tile fv-tile--bicycle" aria-hidden="true"><img src="assets/growth/growth-bicycle.png" alt=""></figure>
-    <div class="fv-new-copy">
-      <h1 class="fv-new-title">
-        <span class="fv-copy-line fv-copy-line--one fx fx-rise">滋賀のふくしを、</span>
-        <span class="fv-copy-line fv-copy-line--two fx fx-rise">支える場所から、</span>
-        <span class="fv-copy-line fv-copy-line--three fx fx-rise">育つ場所へ。</span>
-      </h1>
+  <div class="fv-aun-marquee" aria-hidden="true"><span>AUN AUN AUN AUN AUN AUN</span><span>AUN AUN AUN AUN AUN AUN</span></div>
+  <div class="fv-copy-flow">
+    <div class="fv-flow-row fv-flow-row--one">
+      <span class="fv-flow-copy fx fx-rise">滋賀のふくしを、</span>
+      <figure class="fv-media fv-media--people" aria-label="阿吽と関わる人々の写真">
+        <span class="fv-media-slide fv-media-slide--one"><img src="assets/growth/growth-flowers.png" alt="花に向き合う人"></span>
+        <span class="fv-media-slide fv-media-slide--two"><img src="assets/growth/growth-bread.png" alt="寄り添う人"></span>
+        <span class="fv-media-slide fv-media-slide--three"><img src="assets/growth/growth-birdhouse.png" alt="木工作業をする人"></span>
+        <span class="fv-media-slide fv-media-slide--four"><img src="assets/growth/growth-camera.png" alt="カメラを手にする人"></span>
+      </figure>
+    </div>
+    <div class="fv-flow-row fv-flow-row--two">
+      <figure class="fv-media fv-media--daily" aria-label="育つ日常の写真">
+        <span class="fv-media-slide fv-media-slide--one"><img src="assets/growth/growth-painting.png" alt="創作に取り組む子ども"></span>
+        <span class="fv-media-slide fv-media-slide--two"><img src="assets/growth/growth-camera.png" alt="カメラを手にする人"></span>
+        <span class="fv-media-slide fv-media-slide--three"><img src="assets/growth/growth-bicycle.png" alt="自転車に乗る人"></span>
+        <span class="fv-media-slide fv-media-slide--four"><img src="assets/growth/growth-airplane.png" alt="空へ手を伸ばす子ども"></span>
+      </figure>
+      <span class="fv-flow-copy fx fx-rise">支える場所から、</span>
+    </div>
+    <div class="fv-flow-row fv-flow-row--three">
+      <span class="fv-flow-copy fv-flow-copy--accent fx fx-rise">育つ場所へ。</span>
+      <figure class="fv-media fv-media--growth" aria-label="育つ人の表情">
+        <img src="assets/growth/growth-airplane.png" alt="空へ手を伸ばす子ども">
+      </figure>
     </div>
   </div>
 </section>
 
 <!-- ============ MANIFESTO：2ndビュー ============ -->
 <section class="manifesto" id="manifesto">
+  <div class="manifesto-lake" aria-hidden="true"><img src="assets/fv-lake-surface-v2.png" alt=""></div>
   <div class="container manifesto-inner">
     <h2 class="mani-copy">
       <span class="row"><span class="fx fx-rise"><span class="mani-phrase">人が育つ。</span></span></span>
@@ -102,9 +115,9 @@
     </h2>
     <div class="mani-text fx fx-fade">
       <p class="mani-sentence mani-sentence--opening">福祉は、困っている人を支えるためだけのものではありません。</p>
-      <p class="mani-sentence">支えられる人が自分らしい暮らしを取り戻す。</p>
+      <p class="mani-sentence"><span class="mani-phrase">支えられる人が自分らしい</span><span class="mani-phrase">暮らしを取り戻す。</span></p>
       <p class="mani-sentence">働く人が、仕事を通じて成長する。</p>
-      <p class="mani-sentence">地域にも、安心と可能性が広がっていく。</p>
+      <p class="mani-sentence"><span class="mani-phrase">地域にも、安心と可能性が</span><span class="mani-phrase">広がっていく。</span></p>
       <p class="mani-sentence mani-sentence--closing">あうんが目指すのは、<span class="mani-phrase">人も、暮らしも、</span><span class="mani-phrase">地域も育つ福祉です。</span></p>
     </div>
   </div>
@@ -396,7 +409,7 @@
     <div class="section-head inverse fx fx-rise">
       <p class="sec-num"><span class="num">06</span><i></i><span class="aun-pair" aria-hidden="true"><i></i><i></i></span></p>
       <h2 class="sec-title">まずは、<br>相談から。</h2>
-      <p class="sec-intro">相談、見学、採用、地域連携。それぞれの窓口をご用意しています。</p>
+      <p class="sec-intro">相談、見学、採用、地域連携。それぞれの窓口を<span class="keep-word">ご用意</span>しています。</p>
     </div>
 
     <div class="action-final">
