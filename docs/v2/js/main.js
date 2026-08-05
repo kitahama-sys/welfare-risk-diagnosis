@@ -6,6 +6,28 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* 読み込みの一呼吸。内容が準備できたら、阿吽の印を静かにほどく。 */
+  var loader = document.querySelector(".aun-loader");
+  var loaderFinished = false;
+  var finishLoader = function () {
+    if (loaderFinished) return;
+    loaderFinished = true;
+    document.documentElement.classList.add("is-ready");
+    // ローディングの余韻から、コピーを読む順番でFVをひらく。
+    window.setTimeout(function () {
+      var hero = document.querySelector(".fv-new");
+      if (hero) hero.classList.add("is-revealed");
+    }, reduced ? 0 : 360);
+    // フェードが完了したらDOMから外す。透明なローダーの描画残りを防ぐ。
+    if (loader) window.setTimeout(function () { loader.remove(); }, 820);
+  };
+  if (reduced) {
+    finishLoader();
+  } else {
+    window.addEventListener("load", function () { setTimeout(finishLoader, 900); }, { once: true });
+    setTimeout(finishLoader, 3000);
+  }
+
   /* header state */
   var header = document.getElementById("site-header");
   var heroEl = document.querySelector(".fv, .page-hero");

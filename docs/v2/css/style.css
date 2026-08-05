@@ -60,6 +60,7 @@ em, i { font-style: normal; }
   letter-spacing: 0.18em;
 }
 .sp { display: none; }
+.keep-word { white-space: nowrap; }
 
 /* ---------- 阿吽の対 — 開いた円（阿）と閉じた円（吽）が互い違いに呼吸する ---------- */
 .aun-pair { display: inline-flex; align-items: center; gap: 10px; line-height: 0; }
@@ -1369,111 +1370,417 @@ em, i { font-style: normal; }
 }
 
 /* ===========================================================================
-   HOME FV v11
-   琵琶湖を「地域の装飾」ではなく、暮らしの写真がほどける起点として扱う。
-   8枚の写真はカード群ではなく、一続きの編集面として現れる。
+   HOME FV v12
+   琵琶湖を起点に、二枚一組の暮らしの断片が四方へひらく。
    ========================================================================== */
 .fv-new {
   min-height: 100dvh;
   isolation: isolate;
   overflow: clip;
-  background: #F8F9F6;
+  background:
+    radial-gradient(52% 64% at 50% 53%, rgba(156, 213, 199, .19), transparent 73%),
+    #F4F8F6;
 }
 .fv-new::before {
   display: none;
 }
 .fv-new-lake {
-  display: none;
+  z-index: 1;
+  left: 50%;
+  right: auto;
+  top: 54%;
+  width: min(28vw, 392px);
+  height: min(63vh, 585px);
+  opacity: .98;
+  transform: translate(-50%, -50%);
+  filter: none;
 }
-.fv-new-lake::after { background: linear-gradient(140deg, rgba(248,250,247,.03), rgba(45,126,110,.12)); }
-.fv-new-lake img { object-position: 51% center; filter: saturate(.63) contrast(.91) brightness(1.07); animation: fv-source-water 22s cubic-bezier(.45,0,.2,1) infinite alternate; }
+.fv-new-lake::after { background: linear-gradient(158deg, rgba(223,244,236,.14), rgba(30,116,100,.24)); mix-blend-mode: color; }
+.fv-new-lake img { object-position: 58% 78%; filter: saturate(.46) contrast(.98) brightness(1.05); transform: scale(1.82); animation: fv-lake-drift 18s ease-in-out infinite alternate; }
 .fv-editorial-grid {
   position: absolute;
-  z-index: 4;
-  inset: var(--header-h) clamp(42px, 6vw, 96px) 7.5vh;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(8, minmax(0, 1fr));
+  z-index: 2;
+  inset: var(--header-h) clamp(38px, 5.8vw, 92px) 7.5vh;
 }
-.fv-living-archive {
-  position: absolute;
-  z-index: 1;
-  inset: var(--header-h) 0 0;
-  display: block;
-  transform-origin: left center;
-}
+.fv-photo-pair { position: absolute; z-index: 1; display: grid; gap: 2px; overflow: hidden; }
 .fv-tile {
-  position: absolute;
-  z-index: 1;
+  position: relative;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
   margin: 0;
-  display: none;
-  background: transparent;
+  background: #DDE8E2;
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  mix-blend-mode: multiply;
   will-change: transform, opacity;
 }
-.fv-tile::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(25,60,53,.08), rgba(248,249,246,.02) 70%, rgba(248,249,246,.22)); pointer-events: none; }
-.fv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 1; filter: saturate(.62) contrast(.95) brightness(1.02); transform: scale(1.035); transition: transform 4.8s cubic-bezier(.16,1,.3,1); }
-/* 琵琶湖を源に、写真の内側を水面へ溶かしながら暮らしがひらく。 */
-.fv-tile--sprout, .fv-tile--flowers, .fv-tile--birdhouse, .fv-tile--bread,
-.fv-tile--painting, .fv-tile--airplane, .fv-tile--camera, .fv-tile--bicycle { -webkit-mask-image: none; mask-image: none; }
-/* 写真は「周囲のカード」ではなく、コピーの間を流れる二つの編集面。 */
-.fv-tile--airplane { display: block; left: 0; top: 0; width: 60%; height: 100%; --entry-x: -18px; --entry-y: 0; --entry-delay: 130ms; }
+.fv-tile::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(145deg, rgba(234,246,240,.12), rgba(39,121,104,.22)); mix-blend-mode: color; pointer-events: none; }
+.fv-tile img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.50) contrast(.91) brightness(1.10); transform: scale(1.045); transition: transform 2.2s cubic-bezier(.16,1,.3,1); }
+.fv-photo-pair--northwest { left: 24%; top: 13%; width: 22%; height: 16%; grid-template-columns: .85fr 2.2fr; mask-image: linear-gradient(to right, #000 0 76%, transparent 100%); -webkit-mask-image: linear-gradient(to right, #000 0 76%, transparent 100%); }
+.fv-photo-pair--northeast { right: 19%; top: 16%; width: 23%; height: 18%; grid-template-columns: 2.1fr .85fr; mask-image: linear-gradient(to left, #000 0 76%, transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 0 76%, transparent 100%); }
+.fv-photo-pair--southwest { left: 17%; bottom: 8%; width: 25%; height: 17%; grid-template-columns: .85fr 1.9fr; mask-image: linear-gradient(to right, #000 0 76%, transparent 100%); -webkit-mask-image: linear-gradient(to right, #000 0 76%, transparent 100%); }
+.fv-photo-pair--southeast { right: 17%; bottom: 6%; width: 29%; height: 21%; grid-template-columns: 2.55fr .9fr; mask-image: linear-gradient(to left, #000 0 76%, transparent 100%); -webkit-mask-image: linear-gradient(to left, #000 0 76%, transparent 100%); }
+.fv-tile--sprout { border-radius: 0 0 56px 0; }
+.fv-tile--birdhouse { border-radius: 0 0 0 56px; }
+.fv-tile--camera { border-radius: 0 56px 0 0; }
+.fv-tile--airplane { border-radius: 56px 0 0 0; }
+.fv-tile--flowers img { object-position: 58% center; }
+.fv-tile--sprout img { object-position: 52% center; }
+.fv-tile--sprout img { filter: saturate(.43) contrast(.88) brightness(1.28); }
+.fv-tile--birdhouse img { object-position: 57% center; }
+.fv-tile--bread img { object-position: 50% center; }
+.fv-tile--painting img { object-position: 58% center; }
+.fv-tile--camera img { object-position: 42% center; }
+.fv-tile--airplane img { object-position: 55% center; }
+.fv-tile--bicycle img { object-position: 62% center; }
+.fv-photo-pair--northwest .fv-tile img { filter: saturate(.38) contrast(.88) brightness(1.10); }
+.fv-photo-pair--northeast .fv-tile img { filter: saturate(.44) contrast(.90) brightness(1.08); }
+.fv-photo-pair--southwest .fv-tile img { filter: saturate(.52) contrast(.92) brightness(1.08); }
+.fv-photo-pair--southeast .fv-tile img { filter: saturate(.62) contrast(.94) brightness(1.06); }
 .fv-new-copy { position: absolute; z-index: 3; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
-.fv-new-title { position: relative; width: 100%; height: 100%; margin: 0; font-size: clamp(43px, 4.05vw, 60px); font-weight: 700; line-height: 1.4; letter-spacing: .075em; text-align: left; text-shadow: none; }
+.fv-new-title { position: relative; width: 100%; height: 100%; margin: 0; font-size: clamp(45px, 4.55vw, 66px); font-weight: 700; line-height: 1.05; letter-spacing: .095em; text-align: center; text-shadow: 0 1px 0 rgba(244,248,246,.72); }
 .fv-copy-line { position: absolute; display: block; white-space: nowrap; }
-.fv-copy-line--one { top: 28%; left: 64%; }
-.fv-copy-line--two { top: 43%; left: 64%; }
-.fv-copy-line--three { top: 58%; left: 64%; color: var(--teal); }
-/* 湖の中心から、外側の暮らしへ。一度だけ開き、以降は止まる。 */
-.js .fv-tile { opacity: 0; transform: translate3d(var(--entry-x, -16px), var(--entry-y, 10px), 0) scale(.985); }
-.js .fv-new.is-expanded .fv-tile { animation: fv-photo-unfold 1.05s cubic-bezier(.16,1,.3,1) var(--entry-delay, 0ms) both; }
+.fv-copy-line--one { top: 30%; left: 0; width: 100%; }
+.fv-copy-line--two { top: 45%; left: 0; width: 100%; }
+.fv-copy-line--three { top: 60%; left: 0; width: 100%; color: var(--teal); font-size: 1.11em; font-weight: 800; }
+.js .fv-photo-pair {
+  opacity: 0;
+  transform: translate3d(var(--pair-x, 0), var(--pair-y, 0), 0) scale(.985);
+}
+.js .fv-new.is-expanded .fv-photo-pair { animation: fv-pair-unfold 1.05s cubic-bezier(.16,1,.3,1) var(--pair-delay, 0ms) both; }
 .js .fv-new.is-expanded .fv-tile img { transform: scale(1); }
-.fv-tile--sprout { --entry-x: -5px; --entry-y: 8px; --entry-delay: 0ms; }
-.fv-tile--flowers { --entry-x: -15px; --entry-y: 11px; --entry-delay: 100ms; }
-.fv-tile--birdhouse { --entry-x: -20px; --entry-y: 10px; --entry-delay: 170ms; }
-.fv-tile--bread { --entry-x: -16px; --entry-y: 4px; --entry-delay: 250ms; }
-.fv-tile--painting { --entry-x: -20px; --entry-y: 3px; --entry-delay: 320ms; }
-.fv-tile--airplane { --entry-x: -10px; --entry-y: -12px; --entry-delay: 390ms; }
-.fv-tile--camera { --entry-x: 10px; --entry-y: -13px; --entry-delay: 460ms; }
-.fv-tile--bicycle { --entry-x: 17px; --entry-y: -15px; --entry-delay: 530ms; }
-@keyframes fv-photo-unfold {
-  from { opacity: 0; transform: translate3d(var(--entry-x, -16px), var(--entry-y, 10px), 0) scale(.985); }
-  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+.fv-photo-pair--northwest { --pair-x: 138px; --pair-y: 104px; --pair-delay: 0ms; }
+.fv-photo-pair--northeast { --pair-x: -138px; --pair-y: 104px; --pair-delay: 90ms; }
+.fv-photo-pair--southwest { --pair-x: 132px; --pair-y: -92px; --pair-delay: 180ms; }
+.fv-photo-pair--southeast { --pair-x: -132px; --pair-y: -92px; --pair-delay: 270ms; }
+
+/* 写真は四角いグリッドに閉じ込めず、琵琶湖の周りから育つ断片として位置をずらす。 */
+@media (min-width: 901px) {
+  .fv-photo-pair { display: grid; overflow: hidden; mask-image: none; -webkit-mask-image: none; }
+  .fv-photo-pair .fv-tile { position: relative; mask-image: none; -webkit-mask-image: none; }
+  .fv-photo-pair--northwest { left: 19%; top: 16%; width: 15%; height: 13%; grid-template-columns: .85fr 2.15fr; }
+  .fv-photo-pair--northeast { right: 7%; top: 35%; width: 24%; height: 12%; grid-template-columns: 2.1fr .9fr; }
+  .fv-photo-pair--southwest { left: 17%; top: 50%; width: 23%; height: 14%; grid-template-columns: .9fr 1.9fr; }
+  .fv-photo-pair--southeast { right: 9%; top: 64%; width: 24%; height: 15%; grid-template-columns: 2.4fr .9fr; }
+  .fv-tile--sprout { border-radius: 0 0 54px 0; }
+  .fv-tile--birdhouse { border-radius: 0 0 0 54px; }
+  .fv-tile--camera { border-radius: 0 54px 0 0; }
+  .fv-tile--airplane { border-radius: 54px 0 0 0; }
+  .fv-copy-line { width: auto; text-align: left; }
+  .fv-copy-line--one { left: 31%; }
+  .fv-copy-line--two { left: 40%; }
+  .fv-copy-line--three { left: 32%; }
 }
-/* 写真を「現れる要素」にせず、湖岸の景色そのものがひらくように見せる。 */
-.js .fv-tile--airplane { opacity: 1; transform: none; clip-path: inset(0 100% 0 0); }
-.js .fv-new.is-expanded .fv-tile--airplane { animation: fv-editorial-image-reveal 1.35s cubic-bezier(.76,0,.24,1) 0ms both; }
-@keyframes fv-editorial-image-reveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-@keyframes fv-source-water { from { transform: scale(1.05) translate3d(-1.1%, .7%, 0); } to { transform: scale(1.12) translate3d(1.1%, -.7%, 0); } }
+@keyframes fv-pair-unfold { from { opacity: 0; transform: translate3d(var(--pair-x,0), var(--pair-y,0), 0) scale(.985); } to { opacity: 1; transform: translate3d(0,0,0) scale(1); } }
+@keyframes fv-lake-drift { from { transform: scale(1.82) translate3d(-.5%, .35%, 0); } to { transform: scale(1.90) translate3d(.5%, -.35%, 0); } }
 
 @media (max-width: 900px) {
   .fv-new { min-height: 100dvh; padding-top: 0; }
-  .fv-editorial-grid { inset: var(--header-h) 20px 8vh; grid-template-columns: repeat(6, minmax(0,1fr)); grid-template-rows: repeat(10, minmax(0,1fr)); }
-  .fv-living-archive { inset: var(--header-h) 0 0; }
-  .fv-tile--airplane { display: block; left: 0; top: 0; width: 100%; height: 46%; }
+  .fv-new-lake { top: auto; left: 51%; bottom: -6%; width: min(58vw, 350px); height: 55vh; opacity: .58; }
+  .fv-editorial-grid { inset: var(--header-h) 20px 7vh; }
   .fv-new-copy { inset: 0; left: auto; top: auto; width: 100%; height: 100%; transform: none; }
-  .fv-new-title { position: absolute; top: 57%; left: 0; width: 100%; height: auto; padding-inline: 24px; font-size: clamp(30px, 8vw, 40px); line-height: 1.58; letter-spacing: .055em; text-align: left; }
+  .fv-new-title { position: absolute; top: 48px; left: 0; width: 100%; height: auto; font-size: clamp(26px, 5vw, 34px); line-height: 1.58; letter-spacing: .055em; text-align: center; }
   .fv-copy-line { position: static; }
-}
-@media (max-width: 560px) {
-  .fv-new-title {
-    top: 55%;
-    padding-inline: 24px;
-    font-size: clamp(25px, 7.1vw, 29px);
-    line-height: 1.68;
-    letter-spacing: .03em;
-  }
-  .fv-copy-line { white-space: nowrap; }
+  .fv-photo-pair--northwest { left: 0; top: 38%; width: 42%; height: 13%; }
+  .fv-photo-pair--northeast { right: 0; top: 47%; width: 39%; height: 13%; }
+  .fv-photo-pair--southwest { left: 0; bottom: 15%; width: 47%; height: 13%; }
+  .fv-photo-pair--southeast { right: 0; bottom: 7%; width: 43%; height: 13%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .fv-tile, .fv-living-archive, .fv-editorial-grid, .fv-new-lake { animation: none !important; }
-  .js .fv-tile { opacity: 1; transform: none; clip-path: none; }
+  .fv-tile, .fv-photo-pair, .fv-editorial-grid, .fv-new-lake { animation: none !important; }
+  .js .fv-photo-pair { opacity: 1; transform: none; }
+}
+
+/* ===========================================================================
+   HOME FV v13
+   写真を背景にせず、コピーのリズムとして置く。琵琶湖は次の場面の土台にする。
+   ========================================================================== */
+.aun-loader { display: none; }
+.js .aun-loader {
+  position: fixed; inset: 0; z-index: 999;
+  display: grid; place-items: center;
+  overflow: hidden; background: #60BDC4; color: var(--white);
+  transition: opacity .72s cubic-bezier(.4,0,.2,1), visibility .72s step-end;
+}
+.aun-loader::before, .aun-loader::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: min(72vw, 980px); aspect-ratio: 1;
+  border: 1px solid rgba(255,255,255,.26); border-radius: 50%; transform: translate(-50%, -50%) scale(.44);
+  animation: aun-loader-ripple 1.8s cubic-bezier(.16,1,.3,1) infinite;
+}
+.aun-loader::after { width: min(48vw, 650px); animation-delay: .28s; }
+.aun-loader-mark { position: relative; z-index: 1; display: grid; justify-items: center; gap: 18px; color: #fff; }
+.aun-loader-mark img { width: clamp(96px, 10vw, 148px); height: clamp(96px, 10vw, 148px); animation: aun-loader-mark 1.25s cubic-bezier(.16,1,.3,1) infinite alternate; }
+.aun-loader-mark span { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .36em; margin-right: -.36em; }
+.js.is-ready .aun-loader { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes aun-loader-ripple { 0% { opacity: .72; transform: translate(-50%, -50%) scale(.24); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1); } }
+@keyframes aun-loader-mark { from { transform: scale(.94); opacity: .76; } to { transform: scale(1); opacity: 1; } }
+
+.fv-new {
+  position: relative; display: grid; align-items: start; min-height: 100dvh; padding: calc(var(--header-h) + clamp(58px, 7vh, 84px)) var(--pad) clamp(72px, 9vh, 110px);
+  isolation: isolate; overflow: clip; background: #F7FAF8;
+}
+.fv-aun-marquee {
+  position: absolute; z-index: 0; top: 65%; left: 0; width: max-content; display: flex;
+  color: rgba(41,52,49,.022); font-family: var(--sans); font-size: clamp(74px, 11vw, 180px); font-weight: 700;
+  line-height: .8; letter-spacing: .025em; white-space: nowrap; pointer-events: none;
+}
+.fv-aun-marquee span { padding-right: .32em; }
+.fv-copy-flow { position: relative; z-index: 1; width: min(100%, 1100px); margin: 0 auto; display: grid; gap: clamp(30px, 5vh, 58px); }
+.fv-flow-row { display: flex; align-items: center; gap: clamp(20px, 2vw, 32px); min-width: 0; }
+.fv-flow-row--one { justify-content: flex-end; }
+.fv-flow-row--two { justify-content: flex-start; }
+.fv-flow-row--three { justify-content: flex-end; padding-right: clamp(0px, 5vw, 72px); }
+.fv-flow-copy {
+  flex: 0 0 auto; min-width: 0; color: var(--teal); font-family: var(--sans); font-size: clamp(38px, 4.7vw, 68px);
+  font-weight: 500; line-height: 1.08; letter-spacing: .015em; white-space: nowrap;
+}
+.fv-flow-copy--accent { color: var(--tq-ink); font-weight: 700; }
+.fv-media { position: relative; flex: 0 1 auto; overflow: hidden; background: #DDE8E2; border-radius: 1px; }
+.fv-media--people { width: min(25vw, 300px); height: clamp(124px, 12vw, 164px); }
+.fv-media--daily { width: min(28vw, 338px); height: clamp(138px, 13vw, 178px); }
+.fv-media--growth { width: min(29vw, 350px); height: clamp(148px, 14vw, 192px); }
+.fv-media > img, .fv-media-slide, .fv-media-slide img { width: 100%; height: 100%; }
+.fv-media > img, .fv-media-slide img { display: block; object-fit: cover; }
+.fv-media-slide { position: absolute; inset: 0; opacity: 0; animation: fv-photo-cycle 16s cubic-bezier(.4,0,.2,1) infinite; }
+.fv-media-slide--one { animation-delay: 0s; }
+.fv-media-slide--two { animation-delay: 4s; }
+.fv-media-slide--three { animation-delay: 8s; }
+.fv-media-slide--four { animation-delay: 12s; }
+.fv-media-slide img {
+  filter: saturate(.56) contrast(.92) brightness(1.08);
+  transform: scale(1.035);
+  animation: fv-photo-drift 16s cubic-bezier(.4,0,.2,1) infinite;
+}
+.fv-media-slide--one img { --drift-x: .8%; --drift-y: -.45%; }
+.fv-media-slide--two img { --drift-x: -.75%; --drift-y: .5%; animation-delay: 4s; }
+.fv-media-slide--three img { --drift-x: .6%; --drift-y: .55%; animation-delay: 8s; }
+.fv-media-slide--four img { --drift-x: -.65%; --drift-y: -.4%; animation-delay: 12s; }
+.fv-media--growth > img { object-position: 52% center; filter: saturate(.54) contrast(.92) brightness(1.05); animation: fv-growth-drift 12s ease-in-out infinite alternate; }
+
+/* ローダーのあと、言葉→写真→次の言葉の順に、静かに視線をひらく。 */
+.js .fv-new .fv-flow-copy,
+.js .fv-new .fv-media {
+  opacity: 0;
+  will-change: transform, opacity, clip-path;
+}
+.js .fv-new .fv-flow-copy { transform: translate3d(0, 16px, 0); transition: opacity .72s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+.js .fv-new .fv-media { transform: translate3d(0, 13px, 0); clip-path: inset(0 0 100% 0); transition: opacity .48s linear, transform .95s cubic-bezier(.16,1,.3,1), clip-path 1.15s cubic-bezier(.16,1,.3,1); }
+.js .fv-new.is-revealed .fv-flow-copy,
+.js .fv-new.is-revealed .fv-media { opacity: 1; transform: translate3d(0, 0, 0); clip-path: inset(0 0 0 0); }
+.js .fv-new .fv-flow-row--one .fv-flow-copy { transition-delay: .02s; }
+.js .fv-new .fv-flow-row--one .fv-media { transition-delay: .16s; }
+.js .fv-new .fv-flow-row--two .fv-media { transition-delay: .30s; }
+.js .fv-new .fv-flow-row--two .fv-flow-copy { transition-delay: .46s; }
+.js .fv-new .fv-flow-row--three .fv-flow-copy { transition-delay: .62s; }
+.js .fv-new .fv-flow-row--three .fv-media { transition-delay: .78s; }
+@keyframes fv-photo-cycle { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 27%, 100% { opacity: 0; } }
+@keyframes fv-photo-drift {
+  0%, 4% { transform: scale(1.035) translate3d(0, 0, 0); }
+  27% { transform: scale(1.105) translate3d(var(--drift-x), var(--drift-y), 0); }
+  100% { transform: scale(1.035) translate3d(0, 0, 0); }
+}
+@keyframes fv-lake-surface { from { transform: scale(1.05) translate3d(-1.1%, .35%, 0); } to { transform: scale(1.15) translate3d(1.1%, -.35%, 0); } }
+@keyframes fv-growth-drift { from { transform: scale(1.04) translate3d(-.7%, .25%, 0); } to { transform: scale(1.12) translate3d(.7%, -.25%, 0); } }
+@media (prefers-reduced-motion: no-preference) { .fv-aun-marquee { animation: fv-aun-flow 34s linear infinite; } }
+@keyframes fv-aun-flow { from { transform: translateX(0); } to { transform: translateX(-34%); } }
+
+.manifesto { isolation: isolate; overflow: clip; min-height: 94dvh; padding-block: clamp(104px, 11vw, 168px); background: #F5F8F6; }
+.manifesto::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(255,255,255,.42), transparent 48%); pointer-events: none; }
+.manifesto-lake { position: absolute; z-index: 0; right: clamp(-90px, -6vw, -26px); top: 50%; width: min(43vw, 570px); height: min(96%, 770px); overflow: hidden; opacity: .27; transform: translateY(-50%); clip-path: polygon(4% 90%, 12% 95%, 15% 94%, 17% 91%, 16% 88%, 14% 87%, 20% 80%, 23% 80%, 21% 77%, 23% 71%, 31% 70%, 39% 68%, 48% 68%, 49% 67%, 48% 65%, 51% 60%, 59% 57%, 69% 54%, 81% 49%, 91% 42%, 96% 34%, 96% 30%, 89% 26%, 82% 25%, 79% 21%, 78% 18%, 76% 16%, 79% 14%, 76% 10%, 77% 7%, 75% 6%, 73% 7%, 71% 4%, 70% 4%, 71% 6%, 70% 9%, 67% 11%, 70% 13%, 67% 17%, 66% 16%, 66% 14%, 63% 14%, 62% 12%, 64% 11%, 64% 10%, 61% 9%, 60% 9%, 57% 15%, 54% 15%, 53% 13%, 51% 13%, 44% 17%, 44% 19%, 45% 22%, 43% 24%, 43% 28%, 45% 28%, 50% 31%, 51% 36%, 52% 37%, 52% 38%, 48% 38%, 45% 41%, 41% 41%, 38% 42%, 39% 45%, 30% 49%, 28% 50%, 26% 52%, 27% 54%, 18% 58%, 16% 62%, 18% 64%, 21% 66%, 19% 68%, 18% 69%, 20% 71%, 16% 75%, 14% 75%, 15% 76%, 14% 77%, 12% 78%, 12% 79%, 10% 80%, 10% 82%, 8% 82%, 8% 84%, 6% 85%, 6% 88%, 4% 89%); }
+.manifesto-lake img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 75%; filter: saturate(.5) contrast(.91); animation: fv-lake-surface 20s ease-in-out infinite alternate; }
+.manifesto-inner { position: relative; z-index: 1; }
+.mani-copy { font-family: var(--sans); font-weight: 500; font-size: clamp(44px, 5.8vw, 86px); line-height: 1.08; letter-spacing: .02em; color: var(--tq-ink); }
+.mani-copy .row > span { background: none; -webkit-text-fill-color: currentColor; color: inherit; }
+.mani-copy .row:nth-child(2) { color: var(--teal); }
+.mani-copy .row:nth-child(3) { color: var(--tq-ink); }
+.mani-text { position: relative; max-width: 30em; padding-top: clamp(42px, 5vw, 82px); font-size: clamp(16px, 1.28vw, 18px); line-height: 2.05; color: var(--teal-70); }
+.mani-text::before { content: ""; position: absolute; left: 0; top: 0; width: min(8vw, 110px); height: 1px; background: var(--teal); }
+.mani-sentence--opening { font-family: var(--sans); font-size: 1.1em; line-height: 1.85; letter-spacing: .035em; }
+.mani-sentence.mani-sentence--closing { color: var(--tq-ink); }
+
+/* 2ndビューの余韻を、相談への入口まで途切れさせない。 */
+.quick-guide {
+  padding-block: clamp(112px, 12vw, 178px);
+  background: #F5F8F6;
+  border: 0;
+}
+.quick-guide-inner {
+  grid-template-columns: minmax(480px, 1fr) minmax(460px, 1.1fr);
+  gap: clamp(52px, 6vw, 90px);
+  align-items: center;
+  padding-top: clamp(42px, 5vw, 72px);
+  border-top: 1px solid rgba(41,52,49,.15);
+}
+.quick-guide-kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--teal);
+}
+.quick-guide-kicker::before { display: none; }
+.quick-guide h2 {
+  margin-top: 18px;
+  font-family: var(--sans);
+  font-size: clamp(34px, 3.1vw, 48px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: .025em;
+}
+.quick-guide-copy > p:not(.quick-guide-kicker) { margin-top: 24px; font-size: 15px; line-height: 2; color: var(--teal-70); }
+.quick-guide-copy .textlink { margin-top: 34px; color: var(--teal); }
+.quick-guide-list { border-top-color: var(--tq-ink); }
+.quick-guide-list a { min-height: 88px; padding: 20px 4px; }
+.quick-guide-list a:hover { padding-inline: 14px 4px; background: rgba(96,189,196,.07); }
+.quick-num { color: var(--teal); }
+.quick-label { font-family: var(--sans); font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; letter-spacing: .03em; }
+.quick-arrow { color: var(--teal); }
+
+/* 「育つ」の実装：思想を、飾りではなく事実として読ませる。 */
+.sodatsu { padding-block: clamp(112px, 12vw, 176px); background: #F5F8F6; }
+.sodatsu .section-head { max-width: 760px; margin-bottom: clamp(64px, 8vw, 110px); }
+.sodatsu .sec-num { gap: 12px; font-family: var(--sans); }
+.sodatsu .sec-num .aun-pair { display: none; }
+.sodatsu .sec-title {
+  font-family: var(--sans); font-size: clamp(38px, 4.2vw, 62px); font-weight: 500;
+  line-height: 1.16; letter-spacing: .025em;
+}
+.sodatsu .sec-intro { margin-top: 22px; font-size: 16px; line-height: 2; color: var(--teal-70); }
+.sodatsu-list { border-top-color: var(--tq-ink); }
+.sodatsu-item { grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr); gap: clamp(32px, 6vw, 110px); padding-block: clamp(42px, 5vw, 70px); }
+.sodatsu-key { gap: 14px; }
+.sodatsu-key h3 { font-family: var(--sans); font-size: clamp(42px, 4.4vw, 64px); font-weight: 500; line-height: 1; letter-spacing: .02em; }
+.sodatsu .key-num { font-family: var(--sans); font-size: 12px; color: var(--teal); letter-spacing: .1em; }
+.sodatsu .key-en { display: none; }
+.sodatsu-body h4 { font-family: var(--sans); font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; line-height: 1.62; letter-spacing: .025em; margin-bottom: 18px; }
+.sodatsu-body p { max-width: 42em; font-size: 15px; line-height: 2.05; letter-spacing: .01em; color: var(--teal-70); }
+.sodatsu .sec-cta { margin-top: clamp(52px, 7vw, 92px); }
+
+/* コピーはFVで一度、強く伝える。ここでは繰り返さず、次の内容へ静かにつなぐ。 */
+.divider-flow { display: none; }
+
+/* 事業領域：色やバッジで賑やかにせず、阿吽が担う領域を端正に見せる。 */
+.jigyo {
+  background: #eef5f2;
+  padding-block: clamp(112px, 12vw, 176px);
+}
+.jigyo .section-head { max-width: 800px; margin-bottom: clamp(62px, 8vw, 104px); }
+.jigyo .sec-num { font-family: var(--sans); gap: 12px; }
+.jigyo .sec-num .aun-pair { display: none; }
+.jigyo .sec-title {
+  max-width: none; font-family: var(--sans); font-size: clamp(38px, 3.6vw, 54px); font-weight: 500;
+  line-height: 1.18; letter-spacing: .02em; white-space: nowrap;
+}
+.jigyo .sec-intro { margin-top: 22px; font-size: 16px; line-height: 2; color: var(--teal-70); }
+.field-rows { border-top: 1px solid var(--tq-ink); }
+.field-row { overflow: visible; }
+.f-ghost { display: none; }
+.field-row > a {
+  grid-template-columns: minmax(170px, .58fr) minmax(0, 1.42fr) auto;
+  gap: clamp(24px, 5vw, 90px); padding: clamp(34px, 4.5vw, 58px) 0;
+  border-radius: 0; transition: padding .35s var(--ease), background-color .35s var(--ease);
+}
+.field-row > a:hover { padding-inline: 14px 0; background: rgba(96,189,196,.075); }
+.f-name {
+  font-family: var(--sans); font-size: clamp(32px, 3.7vw, 52px); font-weight: 500;
+  letter-spacing: .025em; line-height: 1.25;
+}
+.f-body p { font-size: 16px; font-weight: 500; line-height: 1.9; margin-bottom: 14px; }
+.f-services { gap: 5px 14px; }
+.f-services li { padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--teal-70); font-size: 12px; letter-spacing: .04em; }
+.f-services li:not(:last-child)::after { content: "/"; margin-left: 14px; color: var(--teal); }
+.f-arrow { color: var(--teal); }
+.jigyo .sec-cta { margin-top: clamp(52px, 7vw, 92px); }
+
+/* 拠点情報：案内カードではなく、地域に根を張る拠点の連なりとして見せる。 */
+.kyoten {
+  padding-block: clamp(112px, 12vw, 176px);
+  background: #eef5f2;
+}
+.kyoten .section-head { max-width: 900px; margin-bottom: clamp(62px, 8vw, 104px); }
+.kyoten .sec-num { font-family: var(--sans); gap: 12px; }
+.kyoten .sec-num .aun-pair { display: none; }
+.route-panel {
+  background: transparent; border: 0; border-block: 1px solid var(--tq-ink);
+  border-radius: 0; padding: clamp(30px, 4vw, 50px) 0; margin-bottom: 0; box-shadow: none;
+}
+.route { padding: clamp(24px, 3.4vw, 40px) 0 16px; }
+.route-cta { margin-top: 30px; padding-top: 24px; }
+.hataraku { padding-top: clamp(112px, 12vw, 176px); }
+
+/* 地域連携は、サービス一覧と同じく静かな導線にする。 */
+.chiiki { background: #f5f8f6; }
+.chiiki .sec-num { font-family: var(--sans); gap: 12px; }
+.chiiki .sec-num .aun-pair { display: none; }
+.chiiki-list { border-top-color: var(--tq-ink); }
+.chiiki-list a { border-radius: 0; padding-inline: 0; }
+.chiiki-list a:hover { padding-inline: 14px 0; background: rgba(96,189,196,.07); }
+
+/* 最後の相談導線は、装飾よりも言葉と選択肢を主役にする。 */
+.actions {
+  background: #f7f2e8;
+}
+.actions-orb { display: none; }
+.action-primary { background: transparent; border-left-color: var(--teal); }
+.site-footer { margin-top: 0; border-radius: 0; }
+
+@media (max-width: 900px) {
+  .fv-new { min-height: auto; padding: calc(var(--header-h) + 62px) 20px 74px; }
+  .fv-aun-marquee { top: 66%; font-size: 25vw; color: rgba(41,52,49,.014); }
+  .fv-copy-flow { gap: 38px; }
+  .fv-flow-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .fv-flow-row--one, .fv-flow-row--two, .fv-flow-row--three { justify-content: stretch; padding-right: 0; }
+  .fv-flow-copy { max-width: 100%; font-size: clamp(29px, 7.2vw, 40px); letter-spacing: .01em; }
+  .fv-flow-row--one .fv-flow-copy, .fv-flow-row--two .fv-flow-copy, .fv-flow-row--three .fv-flow-copy { justify-self: start; }
+  .fv-flow-row--one .fv-media, .fv-flow-row--three .fv-media { justify-self: end; }
+  .fv-flow-row--two .fv-media { justify-self: start; }
+  .fv-media--people { width: min(53vw, 280px); height: min(31vw, 146px); }
+  .fv-media--daily { width: min(72vw, 330px); height: min(42vw, 176px); }
+  .fv-media--growth { width: min(57vw, 294px); height: min(33vw, 152px); }
+  .manifesto-lake { right: -24%; top: 58%; width: 82vw; height: 68%; opacity: .17; }
+  .quick-guide { padding-block: 92px; }
+  .quick-guide-inner { grid-template-columns: 1fr; gap: 42px; padding-top: 34px; }
+  .quick-guide h2 { font-size: clamp(31px, 8.2vw, 43px); }
+  .sodatsu { padding-block: 92px; }
+  .sodatsu .section-head { margin-bottom: 56px; }
+  .sodatsu .sec-title { font-size: clamp(34px, 8.5vw, 46px); }
+  .sodatsu .sec-intro { font-size: 15px; }
+  .sodatsu-item { grid-template-columns: 1fr; gap: 18px; padding-block: 38px; }
+  .sodatsu-key h3 { font-size: clamp(38px, 10vw, 52px); }
+  .jigyo { padding-block: 92px; }
+  .jigyo .section-head { margin-bottom: 56px; }
+  .jigyo .sec-title { font-size: clamp(34px, 8.5vw, 46px); white-space: normal; }
+  .jigyo .sec-intro { font-size: 15px; }
+  .field-row > a { grid-template-columns: 1fr auto; gap: 16px; padding-block: 30px; }
+  .f-name { font-size: clamp(30px, 9vw, 44px); }
+  .f-body { grid-column: 1 / -1; }
+  .f-body p { font-size: 15px; }
+  .f-services { display: block; }
+  .f-services li { line-height: 1.9; }
+  .f-services li:not(:last-child)::after { content: none; }
+  .kyoten { padding-block: 92px; }
+  .kyoten .section-head { margin-bottom: 56px; }
+  .route-panel { padding-block: 22px; }
+  .route-cta { display: grid; gap: 14px; }
+  .route-cta p { margin-right: 0; }
+  .hataraku { padding-top: 92px; }
+  .header-inner { gap: 10px; padding-inline: 20px; }
+  .header-actions { margin-left: auto; flex: 0 0 auto; }
+  .header-actions .btn-cta { min-width: 88px; padding-inline: 14px; white-space: nowrap; }
+  .menu-toggle { flex: 0 0 42px; }
+}
+@media (max-width: 600px) {
+  .header-inner { gap: 8px; padding-inline: 20px; }
+  .logo { gap: 8px; }
+  .logo-img { width: 38px; height: 38px; }
+  .logo-text { font-size: 21px; letter-spacing: .1em; }
+  .header-actions { margin-left: auto; flex: 0 0 auto; }
+  .header-actions .btn-cta { min-width: 88px; padding: 11px 12px; white-space: nowrap; }
+  .menu-toggle { width: 40px; height: 40px; flex: 0 0 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aun-loader { display: none !important; }
+  .js .fv-new .fv-flow-copy, .js .fv-new .fv-media { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .fv-aun-marquee, .fv-media-slide, .fv-media-slide img, .fv-media--growth > img, .manifesto-lake img { animation: none !important; }
+  .fv-media-slide--one { opacity: 1; }
 }
