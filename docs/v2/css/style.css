@@ -1801,12 +1801,12 @@ em, i { font-style: normal; }
   .fv-media--people { width: min(53vw, 280px); height: min(31vw, 146px); }
   .fv-media--daily { width: min(72vw, 330px); height: min(42vw, 176px); }
   .fv-media--growth { width: min(57vw, 294px); height: min(33vw, 152px); }
-  .fv-editorial-flow { width: 100%; gap: 24px; }
+  .fv-editorial-flow { width: 100%; gap: 44px; }
   .fv-stage--one, .fv-stage--two { width: 100%; aspect-ratio: 1.64 / 1; margin-inline: 0; }
   .fv-stage--three { width: min(78%, 320px); aspect-ratio: 1.55 / 1; margin-right: 0; }
   .fv-stage .fv-flow-copy { font-size: clamp(27px, 7.1vw, 31px); letter-spacing: .055em; }
   .fv-stage--one .fv-flow-copy { left: 5%; top: 27%; }
-  .fv-stage--two .fv-flow-copy { right: 4%; top: 69%; }
+  .fv-stage--two .fv-flow-copy { right: 4%; top: calc(100% - .48em); }
   .fv-stage--three .fv-flow-copy { left: -8%; top: 43%; }
   .manifesto-lake { right: -24%; top: 58%; width: 82vw; height: 68%; opacity: .17; }
   .quick-guide { padding-block: 92px; }
