@@ -1525,7 +1525,10 @@ em, i { font-style: normal; }
   line-height: .8; letter-spacing: .025em; white-space: nowrap; pointer-events: none;
 }
 .fv-aun-marquee span { padding-right: .32em; }
-.fv-copy-flow { position: relative; z-index: 1; width: min(100%, 1160px); margin: 0 auto; display: grid; gap: clamp(22px, 3.3vh, 38px); }
+.fv-copy-flow {
+  position: relative; z-index: 1; width: min(100%, 1160px); margin: 0 auto; display: grid;
+  gap: clamp(22px, 3.3vh, 38px); transform: translateY(clamp(-62px, -5.5vh, -42px));
+}
 .fv-flow-row { display: flex; align-items: center; gap: clamp(18px, 2vw, 30px); min-width: 0; }
 .fv-flow-row--one { justify-content: flex-end; }
 .fv-flow-row--two { justify-content: flex-start; }
@@ -1553,7 +1556,27 @@ em, i { font-style: normal; }
 .fv-media--daily .fv-media-slide:nth-child(2) img { animation-delay: -2.3s; }
 .fv-media--daily .fv-media-slide:nth-child(3) img { animation-delay: -4.6s; }
 .fv-media--daily .fv-media-slide:nth-child(4) img { animation-delay: -6.9s; }
-.fv-media--growth > video { object-position: center; filter: saturate(.56) contrast(.92) brightness(1.06); }
+.fv-media--growth > img {
+  object-position: 51% 53%; filter: saturate(.52) contrast(.93) brightness(1.05);
+  animation: fv-growth-breathe 9s cubic-bezier(.45,0,.2,1) infinite alternate;
+  will-change: transform;
+}
+
+/* 下部の余白は、情報をひとつだけ置く。カードにはせず、次の行動の入口にする。 */
+.fv-news {
+  position: absolute; z-index: 2; left: 50%; bottom: clamp(22px, 3.5vh, 44px);
+  width: min(100% - 2 * var(--pad), 1160px); transform: translateX(-50%);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 28px;
+  padding-top: 15px; border-top: 1px solid rgba(31,48,44,.22);
+  color: var(--tq-ink); font-family: var(--sans); font-size: 12px; letter-spacing: .06em;
+}
+.fv-news-item { display: grid; grid-template-columns: 82px 108px minmax(0, 1fr) auto; align-items: center; gap: 14px; min-width: 0; }
+.fv-news-label { color: var(--teal); font-weight: 600; }
+.fv-news time { color: var(--teal-70); font-variant-numeric: tabular-nums; }
+.fv-news-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; letter-spacing: .035em; }
+.fv-news-item b, .fv-news-all span { color: var(--teal); font-size: 16px; font-weight: 400; transition: transform .32s cubic-bezier(.16,1,.3,1); }
+.fv-news-all { display: inline-flex; align-items: center; gap: 10px; color: var(--tq-ink); white-space: nowrap; }
+.fv-news-item:hover b, .fv-news-all:hover span { transform: translateX(4px); }
 
 /* ローダーのあと、言葉→写真→次の言葉の順に、静かに視線をひらく。 */
 .js .fv-new .fv-flow-copy,
@@ -1580,6 +1603,7 @@ em, i { font-style: normal; }
 }
 @keyframes fv-people-fade { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 27%, 100% { opacity: 0; } }
 @keyframes fv-daily-drift { from { transform: scale(1.045) translate3d(-.55%, .25%, 0); } to { transform: scale(1.10) translate3d(.55%, -.25%, 0); } }
+@keyframes fv-growth-breathe { from { transform: scale(1.045) translate3d(-.7%, .25%, 0); } to { transform: scale(1.105) translate3d(.7%, -.35%, 0); } }
 @keyframes fv-lake-surface { from { transform: scale(1.05) translate3d(-1.1%, .35%, 0); } to { transform: scale(1.15) translate3d(1.1%, -.35%, 0); } }
 @media (prefers-reduced-motion: no-preference) { .fv-aun-marquee { animation: fv-aun-flow 34s linear infinite; } }
 @keyframes fv-aun-flow { from { transform: translateX(0); } to { transform: translateX(-34%); } }
@@ -1772,9 +1796,9 @@ em, i { font-style: normal; }
 .site-footer { margin-top: 0; border-radius: 0; }
 
 @media (max-width: 900px) {
-  .fv-new { min-height: auto; padding: calc(var(--header-h) + 44px) 20px 58px; }
+  .fv-new { min-height: auto; padding: calc(var(--header-h) + 44px) 20px 38px; }
   .fv-aun-marquee { top: 66%; font-size: 25vw; color: rgba(41,52,49,.014); }
-  .fv-copy-flow { gap: 28px; }
+  .fv-copy-flow { gap: 28px; transform: translateY(-18px); }
   .fv-flow-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .fv-flow-row--one, .fv-flow-row--two, .fv-flow-row--three { justify-content: stretch; padding-right: 0; }
   .fv-flow-copy { max-width: 100%; font-size: clamp(31px, 7.7vw, 43px); font-weight: 500; letter-spacing: .01em; }
@@ -1784,6 +1808,13 @@ em, i { font-style: normal; }
   .fv-media--people { width: min(53vw, 280px); height: min(31vw, 146px); }
   .fv-media--daily { width: min(72vw, 330px); height: min(42vw, 176px); }
   .fv-media--growth { width: min(57vw, 294px); height: min(33vw, 152px); }
+  .fv-news {
+    position: relative; left: auto; bottom: auto; width: 100%; transform: none;
+    margin-top: 12px; grid-template-columns: minmax(0, 1fr) auto; gap: 16px;
+    padding-top: 13px; font-size: 11px;
+  }
+  .fv-news-item { grid-template-columns: 56px 88px minmax(0, 1fr) auto; gap: 8px; }
+  .fv-news-title { font-size: 12px; }
   .manifesto-lake { right: -24%; top: 58%; width: 82vw; height: 68%; opacity: .17; }
   .quick-guide { padding-block: 92px; }
   .quick-guide-inner { grid-template-columns: 1fr; gap: 42px; padding-top: 34px; }
