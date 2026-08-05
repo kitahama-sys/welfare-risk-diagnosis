@@ -1543,7 +1543,7 @@ em, i { font-style: normal; }
 .fv-media > img, .fv-media-slide img { display: block; object-fit: cover; }
 .fv-media--people > img { filter: saturate(.56) contrast(.92) brightness(1.08); object-position: 50% 42%; }
 .fv-media-track { display: flex; width: 500%; height: 100%; will-change: transform; animation: fv-daily-slider 22s cubic-bezier(.76,0,.24,1) infinite; }
-.fv-media--daily .fv-media-slide { position: relative; flex: 0 0 20%; opacity: 1; animation: none; }
+.fv-media--daily .fv-media-slide { position: relative; flex: 0 0 20%; overflow: hidden; opacity: 1; animation: none; }
 .fv-media--daily .fv-media-slide img { filter: saturate(.56) contrast(.92) brightness(1.08); transform: scale(1.045); animation: fv-daily-drift 8s ease-in-out infinite alternate; }
 .fv-media--daily .fv-media-slide:nth-child(2) img { animation-delay: -2.3s; }
 .fv-media--daily .fv-media-slide:nth-child(3) img { animation-delay: -4.6s; }
