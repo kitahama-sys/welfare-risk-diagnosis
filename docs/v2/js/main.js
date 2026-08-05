@@ -5,6 +5,12 @@
   document.documentElement.classList.add("js");
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) {
+    document.querySelectorAll(".fv-media video").forEach(function (video) {
+      video.pause();
+      video.removeAttribute("autoplay");
+    });
+  }
 
   /* 読み込みの一呼吸。内容が準備できたら、阿吽の印を静かにほどく。 */
   var loader = document.querySelector(".aun-loader");

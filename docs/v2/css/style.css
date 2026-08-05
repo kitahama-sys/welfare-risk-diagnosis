@@ -1539,16 +1539,21 @@ em, i { font-style: normal; }
 .fv-media--people { width: min(24vw, 292px); height: clamp(122px, 11.6vw, 158px); }
 .fv-media--daily { width: min(27vw, 326px); height: clamp(136px, 12.8vw, 174px); }
 .fv-media--growth { width: min(29vw, 350px); height: clamp(148px, 14vw, 192px); }
-.fv-media > img, .fv-media-slide, .fv-media-slide img { width: 100%; height: 100%; }
-.fv-media > img, .fv-media-slide img { display: block; object-fit: cover; }
-.fv-media--people > img { filter: saturate(.56) contrast(.92) brightness(1.08); object-position: 50% 42%; }
+.fv-media > img, .fv-media > video, .fv-media-slide, .fv-media-slide img { width: 100%; height: 100%; }
+.fv-media > img, .fv-media > video, .fv-media-slide img { display: block; object-fit: cover; }
+.fv-media--people .fv-media-slide { position: absolute; inset: 0; opacity: 0; animation: fv-people-fade 20s cubic-bezier(.4,0,.2,1) infinite; }
+.fv-media--people .fv-media-slide--one { animation-delay: 0s; }
+.fv-media--people .fv-media-slide--two { animation-delay: 5s; }
+.fv-media--people .fv-media-slide--three { animation-delay: 10s; }
+.fv-media--people .fv-media-slide--four { animation-delay: 15s; }
+.fv-media--people .fv-media-slide img { filter: saturate(.56) contrast(.92) brightness(1.08); object-position: 50% 42%; }
 .fv-media-track { display: flex; width: 500%; height: 100%; will-change: transform; animation: fv-daily-slider 22s cubic-bezier(.76,0,.24,1) infinite; }
 .fv-media--daily .fv-media-slide { position: relative; flex: 0 0 20%; overflow: hidden; opacity: 1; animation: none; }
 .fv-media--daily .fv-media-slide img { filter: saturate(.56) contrast(.92) brightness(1.08); transform: scale(1.045); animation: fv-daily-drift 8s ease-in-out infinite alternate; }
 .fv-media--daily .fv-media-slide:nth-child(2) img { animation-delay: -2.3s; }
 .fv-media--daily .fv-media-slide:nth-child(3) img { animation-delay: -4.6s; }
 .fv-media--daily .fv-media-slide:nth-child(4) img { animation-delay: -6.9s; }
-.fv-media--growth > img { object-position: 58% center; filter: saturate(.56) contrast(.92) brightness(1.06); animation: fv-growth-film 8s cubic-bezier(.45,0,.25,1) infinite alternate; }
+.fv-media--growth > video { object-position: center; filter: saturate(.56) contrast(.92) brightness(1.06); }
 
 /* ローダーのあと、言葉→写真→次の言葉の順に、静かに視線をひらく。 */
 .js .fv-new .fv-flow-copy,
@@ -1573,9 +1578,9 @@ em, i { font-style: normal; }
   61%, 77% { transform: translate3d(-60%, 0, 0); }
   81%, 100% { transform: translate3d(-80%, 0, 0); }
 }
+@keyframes fv-people-fade { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 27%, 100% { opacity: 0; } }
 @keyframes fv-daily-drift { from { transform: scale(1.045) translate3d(-.55%, .25%, 0); } to { transform: scale(1.10) translate3d(.55%, -.25%, 0); } }
 @keyframes fv-lake-surface { from { transform: scale(1.05) translate3d(-1.1%, .35%, 0); } to { transform: scale(1.15) translate3d(1.1%, -.35%, 0); } }
-@keyframes fv-growth-film { from { transform: scale(1.035) translate3d(-.7%, .45%, 0); } to { transform: scale(1.12) translate3d(.7%, -.45%, 0); } }
 @media (prefers-reduced-motion: no-preference) { .fv-aun-marquee { animation: fv-aun-flow 34s linear infinite; } }
 @keyframes fv-aun-flow { from { transform: translateX(0); } to { transform: translateX(-34%); } }
 
