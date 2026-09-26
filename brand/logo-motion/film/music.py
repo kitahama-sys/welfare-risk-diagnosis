@@ -65,14 +65,15 @@ def bp(x, lo, hi):
 def kick(g=1.0):
     t = np.arange(int(0.45 * SR)) / SR
     f = 45 + 95 * np.exp(-t * 28)
-    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 7)
+    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 6)
     s += 0.3 * np.exp(-t * 90) * rng.standard_normal(len(t)) * 0.3
     return np.tanh(s * 1.4) * g
 def clap():
     t = np.arange(int(0.3 * SR)) / SR
     n = bp(rng.standard_normal(len(t)), 900, 5000)
     e = np.exp(-t * 22) + 0.6 * np.exp(-np.maximum(t - 0.012, 0) * 30) * (t > 0.012)
-    return n * e * 0.5
+    body = np.sin(2 * np.pi * 185 * t) * np.exp(-t * 25) * 0.6
+    return (n * e * 0.45 + body) * 0.9
 def hat(open_=False):
     t = np.arange(int((0.25 if open_ else 0.06) * SR)) / SR
     return hp(rng.standard_normal(len(t)), 7000) * np.exp(-t * (14 if open_ else 70)) * 0.35
@@ -83,12 +84,14 @@ def pluck(m, dur=1.2, bright=1.4):
 def bell(m, dur=2.5):
     t = np.arange(int(dur * SR)) / SR
     f = midi(m)
-    s = sum(a * np.sin(2 * np.pi * f * r * t) * np.exp(-t * d) for r, a, d in [(1, 1, 1.6), (2.0, 0.4, 2.4), (2.76, 0.35, 3.5), (5.4, 0.18, 6), (8.9, 0.08, 9)])
+    s = sum(a * np.sin(2 * np.pi * f * r * t) * np.exp(-t * d) for r, a, d in [(1, 1, 1.8), (2.0, 0.3, 3.0), (3.0, 0.12, 5.0)])
     return s * 0.28 * np.minimum(t * 400, 1)
 def boop(m, g=1.0):
     t = np.arange(int(0.35 * SR)) / SR
-    f = midi(m) * (1 + 0.5 * np.exp(-t * 40))
-    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 11) * 0.5 * g
+    f = midi(m - 36) * (1 + 1.2 * np.exp(-t * 30))
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9)
+    click = lp(rng.standard_normal(len(t)), 2500) * np.exp(-t * 120) * 0.25
+    return np.tanh((body + click) * 1.3) * 0.55 * g
 def whoosh(dur, up=True, g=1.0):
     n = int(dur * SR); t = np.arange(n) / SR
     x = rng.standard_normal(n)
@@ -115,12 +118,14 @@ def riser(dur, g=1.0):
     return (tone + whoosh(dur, True) * 0.8) * (t / dur) ** 2 * g
 def boing(m, g=1.0):
     t = np.arange(int(0.6 * SR)) / SR
-    f = midi(m) * (1 + 0.25 * np.sin(2 * np.pi * 9 * t) * np.exp(-t * 4)) * (1 + 0.6 * np.exp(-t * 20))
-    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 5) * 0.4 * g
+    f = midi(m - 36) * (1 + 0.12 * np.sin(2 * np.pi * 7 * t) * np.exp(-t * 3))
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) + 0.3 * np.sin(4 * np.pi * np.cumsum(f) / SR)
+    return lp(np.tanh(x * 1.5), 900) * np.exp(-t * 4) * 0.45 * g
 def sparkle(t0, count, spread, notes, g=0.5, pan=0.6):
     for i in range(count):
-        m = notes[i % len(notes)] + 12 * (i // len(notes) % 2)
-        put(bell(m, 1.4) * 0.6, t0 + spread * i / count + rng.random() * 0.02, g, (rng.random() * 2 - 1) * pan, 0.5)
+        if i % 2: continue
+        m = notes[i % len(notes)] - 24
+        put(bell(m, 1.6) * 0.45, t0 + spread * i / count + rng.random() * 0.02, g * 0.6, (rng.random() * 2 - 1) * pan, 0.6)
 
 # ---------- harmony ----------
 # one chord per bar (2 s). D major: D  Bm  G  A
@@ -130,7 +135,7 @@ def pad_bar(bar, chord, gain, bright=0.8):
     dur = 2.0 + 1.2
     for m in CH[chord][1:]:
         s = additive(midi(m), dur, 9, bright, detune=8)
-        s = lp(s, 1600 + 900 * bright)
+        s = lp(s, 900 + 600 * bright)
         e = env_adsr(len(s), 0.35, 0.3, 0.8, 0.5, 2.0)
         put(s * e * 0.12, bar * 2.0, gain, (m % 5 - 2) * 0.2, 0.45)
 def bass_bar(bar, chord, gain, pattern):
@@ -149,6 +154,8 @@ for bar, ch in enumerate(PROG):
     pad_bar(bar, ch, 0.55 if intro else (0.25 if pause else 0.8), bright=0.6 if intro else 1.0)
     if 6 <= t0 < 22:
         bass_bar(bar, ch, 1.0, [1, 0, 1, 1, 0, 1, 1, 0])
+        tt = np.arange(int(2.0 * SR)) / SR
+        put(np.sin(2 * np.pi * midi(CH[ch][0] - 24) * tt) * 0.35 * np.minimum(tt * 50, 1) * np.minimum((2.0 - tt) * 50, 1), t0, 1.0, 0, 0.0)
         for b in range(4):
             bt = t0 + b * BEAT
             put(kick(0.9), bt, 1.0, 0, 0.05)
@@ -159,7 +166,7 @@ for bar, ch in enumerate(PROG):
         # arpeggio carries the story
         arp = CH[ch][1:] + [CH[ch][2] + 12]
         for i in range(8):
-            put(pluck(arp[i % len(arp)] + 12, 0.6), t0 + i * 0.25, 0.55, (-1) ** i * 0.4, 0.35)
+            put(lp(pluck(arp[i % len(arp)], 0.5, 2.2), 2200), t0 + i * 0.25, 0.6, (-1) ** i * 0.4, 0.3)
     if t0 >= 24:
         bass_bar(bar, ch, 0.7, [1, 0, 0, 0, 1, 0, 0, 0])
 
@@ -200,7 +207,7 @@ for i in range(10): put(hat(), E(23.45 + i * 0.035), 0.5, (i - 5) * 0.12, 0.1)
 # the pause: breath in, then the i-dot lands on the downbeat of bar 13
 put(riser(1.6, 1.0), 22.4, 0.9, 0, 0.4)
 put(impact(1.1), 24.0, 1.0, 0, 0.6)
-for m in [50, 57, 62, 66, 69, 74, 78]:
+for m in [38, 45, 50, 57, 62, 66, 69]:
     s = additive(midi(m), 4.0, 10, 1.1, detune=6)
     put(lp(s, 3500) * env_adsr(len(s), 0.01, 0.4, 0.5, 1.2, 1.5) * 0.12, 24.0, 1.0, (m % 7 - 3) * 0.12, 0.6)
 sparkle(24.0, 16, 1.6, [74, 78, 81, 86, 90], 0.45, 0.9)
